@@ -1,0 +1,24 @@
+{
+  "name": "cbpatio",
+  "version": "1.0.0",
+  "description": "Projeto para TCC na escola ETEC Fernando Prestes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zaiaaa/cbpatio.git"
+  },
+  "keywords": [
+    "CBPATIO",
+    "CAMPEONATO",
+    "E-SPORTS"
+  ],
+  "author": "Gustavo Zaia e Pedro Castelo Branco",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zaiaaa/cbpatio/issues"
+  },
+  "homepage": "https://github.com/zaiaaa/cbpatio#readme"
+}
