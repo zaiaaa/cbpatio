@@ -1,9 +1,12 @@
 const express = require('express')
 const app = express()
 const port = 3005 
-
-
 require('dotenv').config()
+
+const router = require('./routes/index')
+
+router(app, express)
+
 
 app.get('/', (req, res) => {
     res.send('ola mundo')
