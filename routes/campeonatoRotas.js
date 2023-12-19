@@ -8,17 +8,17 @@ router.get("/campeonatos", (req, res) => {
 })
 
 router.get("/campeonatos/:nome", (req, res) => {
-    const { nome } = req.params
-    campeonatoController.getByName(req, res, nome)
-
+    campeonatoController.getByName(req, res)
 })
 
 router.post("/campeonatos/cadastrar", (req, res) => {
-    console.log(req.body)
     campeonatoController.cadastrarCampeonato(req, res)
-
 })
 
+
+router.put("/campeonatos/atualizar/:id", (req, res) => {
+    campeonatoController.atualizarCampeonato(req, res)
+})
 
 
 
