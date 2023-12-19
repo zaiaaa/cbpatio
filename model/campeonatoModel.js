@@ -2,7 +2,6 @@ const conn = require('../inc/conexao')
 
 class CamepeonatoModel{
     executarQuery(sql, parametros=""){
-
         return new Promise((resolve, rejects) => {
             conn.query(sql, parametros, (err, resp) => {
                 if(err){
@@ -16,13 +15,18 @@ class CamepeonatoModel{
     }
 
     get(){
-        const sql = "SELECT * FROM campeonato"
+        const sql = "SELECT * FROM Campeonato"
         return this.executarQuery(sql)
     }
 
     getByName(nome){
-        const sql = "SELECT * FROM campeonato WHERE nome = ?"
+        const sql = "SELECT * FROM Campeonato WHERE nome = ?"
         return this.executarQuery(sql, nome)
+    }
+
+    cadastrarCampeonato(body){
+        const sql = "INSERT INTO Campeonato SET ?"
+        return this.executarQuery(sql, body)
     }
 
 }

@@ -4,6 +4,8 @@ const port = 3005
 require('dotenv').config()
 
 const router = require('./routes/index')
+
+
 const criarTabelas = require("./inc/criarTabelas")
 const conn = require("./inc/conexao")
 

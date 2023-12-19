@@ -13,4 +13,14 @@ router.get("/campeonatos/:nome", (req, res) => {
 
 })
 
+router.post("/campeonatos/cadastrar", (req, res) => {
+    console.log(req.body)
+    campeonatoController.cadastrarCampeonato(req, res)
+
+})
+
+
+
+
+
 module.exports = router
