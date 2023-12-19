@@ -9,7 +9,9 @@ class CampeonatoController {
             .catch(err => res.status(400).json(err.message))
     }
 
-    getByName(req, res, nome) {
+    getByName(req, res) {
+        const { nome } = req.params
+
         const listagemDeCampeonatosPeloNome = campeonatoModel.getByName(nome)
 
         listagemDeCampeonatosPeloNome
@@ -20,11 +22,21 @@ class CampeonatoController {
 
     cadastrarCampeonato(req, res) {
         const body = req.body
-        console.log(body)
         const campCadastrado = campeonatoModel.cadastrarCampeonato(body)
 
         campCadastrado
             .then((campCadastrado) => (res.status(201).json(campCadastrado)))
+            .catch((err) => (res.status(400).json(err)))
+    }
+
+    atualizarCampeonato(req, res) {
+        const body = req.body
+        const { id } = req.params
+
+        const campAtualizado = campeonatoModel.atualizarCampeonato(body, id)
+
+        campAtualizado
+            .then((campAtualizado) => (res.status(200).json(campAtualizado)))
             .catch((err) => (res.status(400).json(err)))
     }
 }
