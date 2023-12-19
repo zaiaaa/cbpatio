@@ -29,6 +29,11 @@ class CamepeonatoModel{
         return this.executarQuery(sql, body)
     }
 
+    atualizarCampeonato(body, id){
+        const sql = "UPDATE Campeonato SET ? WHERE id_campeonato = ?"
+        return this.executarQuery(sql, [body, id])
+    }
+
 }
 
 module.exports = new CamepeonatoModel
