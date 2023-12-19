@@ -34,6 +34,10 @@ class CamepeonatoModel{
         return this.executarQuery(sql, [body, id])
     }
 
-}
+    deletarCampeonato(id){
+        const sql = "DELETE FROM Campeonato WHERE id_campeonato = ?"
+        return this.executarQuery(sql, id)
+    }
+}   
 
 module.exports = new CamepeonatoModel
