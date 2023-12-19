@@ -9,9 +9,10 @@ const router = require('./routes/index')
 const criarTabelas = require("./inc/criarTabelas")
 const conn = require("./inc/conexao")
 
-criarTabelas.init(conn)
+
 
 router(app, express)
+criarTabelas.init(conn)
 
 
 app.get('/', (req, res) => {
