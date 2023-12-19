@@ -21,6 +21,11 @@ router.put("/campeonatos/atualizar/:id", (req, res) => {
 })
 
 
+router.delete("/campeonatos/excluir/:id", (req, res) => {
+    campeonatoController.deletarCampeonato(req, res)
+})
+
+
 
 
 module.exports = router
