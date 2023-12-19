@@ -39,6 +39,16 @@ class CampeonatoController {
             .then((campAtualizado) => (res.status(200).json(campAtualizado)))
             .catch((err) => (res.status(400).json(err)))
     }
+
+    deletarCampeonato(req, res) {
+        const { id } = req.params
+
+        const campDeletado = campeonatoModel.deletarCampeonato(id)
+
+        campDeletado
+            .then((campDeletado) => (res.status(204).json(campDeletado)))
+            .catch((err) => (res.status(400).json(err)))
+    }
 }
 
 module.exports = new CampeonatoController()
