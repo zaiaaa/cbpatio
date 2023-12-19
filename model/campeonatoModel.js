@@ -1,17 +1,28 @@
 const conn = require('../inc/conexao')
 
 class CamepeonatoModel{
-    get(){
-        const sql = "SELECT * FROM campeonato"
-        return new Promise((res, rej) => {
-            conn.query(sql, {}, (err, resp) => {
+    executarQuery(sql, parametros=""){
+
+        return new Promise((resolve, rejects) => {
+            conn.query(sql, parametros, (err, resp) => {
                 if(err){
-                    console.log('erro na listagem -> ', err)
-                    rej(err)
+                    console.log('Erro na query -> ', err)
+                    rejects(err)
                 }
-                res(resp)
+
+                resolve(resp)
             })
         })
+    }
+
+    get(){
+        const sql = "SELECT * FROM campeonato"
+        return this.executarQuery(sql)
+    }
+
+    getByName(nome){
+        const sql = "SELECT * FROM campeonato WHERE nome = ?"
+        return this.executarQuery(sql, nome)
     }
 
 }
