@@ -3,11 +3,14 @@ const router = Router()
 const campeonatoController = require('../controller/campeonatoController')
 
 router.get("/campeonatos", (req, res) => {
-    const listagemDeCampeonatos = campeonatoController.get()
-    listagemDeCampeonatos
-    .then(campeonatos => res.status(200).json(campeonatos))
-    .catch(err => res.status(400).json(err.message))
+    campeonatoController.get(req, res)
+   
 })
 
+router.get("/campeonatos/:nome", (req, res) => {
+    const { nome } = req.params
+    campeonatoController.getByName(req, res, nome)
+
+})
 
 module.exports = router
