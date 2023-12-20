@@ -16,7 +16,10 @@ criarTabelas.init(conn)
 
 
 app.get('/', (req, res) => {
-    res.send('ola mundo')
+    res.send({
+            "autores": "Gustavo Zaia e Pedro Castelo Branco",
+            "empresa": "CBPATIO (Todos os direitos reservados.)"
+            })
 })
 
 
