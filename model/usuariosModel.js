@@ -12,6 +12,11 @@ class UsuariosModel{
             })
         })
     }
+    
+    get(){
+        const sql = "SELECT * FROM usuarios"
+        return this.executarQuery(sql)
+    }
 }
 
 module.exports = new UsuariosModel
