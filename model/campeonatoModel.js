@@ -20,8 +20,8 @@ class CamepeonatoModel{
     }
 
     getByName(nome){
-        const sql = "SELECT * FROM Campeonato WHERE nome = ?"
-        return this.executarQuery(sql, nome)
+        const sql = "SELECT * FROM Campeonato WHERE nome LIKE ?"
+        return this.executarQuery(sql, `%${nome}%`)
     }
 
     cadastrarCampeonato(body){
