@@ -24,6 +24,25 @@ class UsuariosController{
         .then(newUser => res.status(201).json(newUser))
         .catch(err => res.status(400).json(err.message))
     }
+
+    atualizarUsuario(req, res){
+        const { id } = req.params
+        const usuario = req.body
+
+        usuariosModel.atualizarUsuario(usuario, id)
+        .then(usuarioAtualizado => res.status(200).json(usuarioAtualizado))
+        .catch(err => res.status(400).json(err.message))
+    }
+
+    deletarUsuario(req, res){
+        const { id } = req.params
+
+        usuariosModel.deletarUsuario(id)
+        .then(usuarioDeletado => res.status(204).json(usuarioDeletado))
+        .catch(err => res.status(400).json(err.message))
+    }
+
+
 }
 
 module.exports = new UsuariosController()
