@@ -17,4 +17,12 @@ router.get('/usuarios/login', (req, res) => {
     usuariosController.logUsuario(req, res)
 })
 
+router.put('/usuarios/atualizar/:id', (req, res) => {
+    usuariosController.atualizarUsuario(req, res)
+})
+
+router.delete('/usuarios/deletar/:id', (req, res) => {
+    usuariosController.deletarUsuario(req, res)
+})
+
 module.exports = router
