@@ -50,6 +50,28 @@ class UsuariosModel{
 
         return this.executarQuery(sql, usuario)
     }
+
+    
+    async atualizarUsuario(usuario, id){
+        const sql = "UPDATE usuario SET ? WHERE id_usuario = ?"        
+        const { senha } = usuario
+        
+        const salt = await bcrypt.genSalt(saltRound);
+        const hash = await bcrypt.hash(senha, salt);
+
+        usuario.senha = hash
+
+        return this.executarQuery(sql, [usuario, id])
+    }
+
+    
+    async deletarUsuario(id){
+        const sql = "DELETE FROM usuario WHERE id_usuario =  ?"        
+
+        return this.executarQuery(sql, id)
+    }
+
+
 }
 
 
