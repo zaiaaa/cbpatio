@@ -20,6 +20,8 @@ class CriarTabelas {
                 id_usuario INT PRIMARY KEY AUTO_INCREMENT,
                 nome VARCHAR(60),
                 nome_usuario VARCHAR(25),
+                contato varchar(11) NOT NULL,
+                plataforma varchar(16) NOT NULL,
                 email VARCHAR(120),
                 senha VARCHAR(150)
             );
@@ -38,7 +40,8 @@ class CriarTabelas {
         const sql = `            
             CREATE TABLE IF NOT EXISTS Time (
                 id_time INT PRIMARY KEY AUTO_INCREMENT,
-                nome VARCHAR(30)
+                nome VARCHAR(30),
+                criado_por varchar(60) NOT NULL
             );
         `
         this.conn.query(sql, (error) => {
@@ -53,11 +56,15 @@ class CriarTabelas {
 
     criarTabelaCampeonato(){
         const sql = `
+
             CREATE TABLE IF NOT EXISTS Campeonato (
                 id_campeonato INT PRIMARY KEY AUTO_INCREMENT,
                 nome VARCHAR(60),
                 data DATETIME,
                 sinopse VARCHAR(120),
+                valor_entrada float NOT NULL,
+                limite_jogadores_time int(11) DEFAULT NULL,
+                sinopse varchar(120) DEFAULT NULL,
                 modalidade VARCHAR(20)
             );
         `
@@ -96,6 +103,7 @@ class CriarTabelas {
         const sql = ` 
             CREATE TABLE IF NOT EXISTS Time_campeonato(
                 id_time_campeonato INT PRIMARY KEY AUTO_INCREMENT,
+                limite_jogadores int(11) NOT NULL,
                 fk_id_time INT,
                 fk_id_campeonato INT,
                 
