@@ -5,8 +5,8 @@ class UsuariosModel{
         return new Promise((res, rej) => {
             conn.query(sql, parametros, (err, resp) => {
                 if(err){
-                    console.log('erro -> ', e)
-                    rej(e)
+                    console.log('erro -> ', err.message)
+                    rej(err)
                 }
                 res(resp)
             })
@@ -14,7 +14,7 @@ class UsuariosModel{
     }
     
     get(){
-        const sql = "SELECT * FROM usuarios"
+        const sql = "SELECT * FROM usuario"
         return this.executarQuery(sql)
     }
 }
