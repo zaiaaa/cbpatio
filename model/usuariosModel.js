@@ -36,7 +36,7 @@ class UsuariosModel{
         } else {
             return 'senha errada';
         }
-        //TODO refatorar essa bomba
+        //TODO refatorar essa bomba 
     }
 
     async novoUsuario(usuario){
