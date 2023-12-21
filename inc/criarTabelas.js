@@ -61,7 +61,6 @@ class CriarTabelas {
                 id_campeonato INT PRIMARY KEY AUTO_INCREMENT,
                 nome VARCHAR(60),
                 data DATETIME,
-                sinopse VARCHAR(120),
                 valor_entrada float NOT NULL,
                 limite_jogadores_time int(11) DEFAULT NULL,
                 sinopse varchar(120) DEFAULT NULL,

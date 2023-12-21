@@ -51,7 +51,6 @@ class UsuariosModel{
         return this.executarQuery(sql, usuario)
     }
 
-    
     async atualizarUsuario(usuario, id){
         const sql = "UPDATE usuario SET ? WHERE id_usuario = ?"        
         const { senha } = usuario
@@ -64,7 +63,6 @@ class UsuariosModel{
         return this.executarQuery(sql, [usuario, id])
     }
 
-    
     deletarUsuario(id){
         const sql = "DELETE FROM usuario WHERE id_usuario =  ?"        
 
