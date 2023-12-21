@@ -65,7 +65,7 @@ class UsuariosModel{
     }
 
     
-    async deletarUsuario(id){
+    deletarUsuario(id){
         const sql = "DELETE FROM usuario WHERE id_usuario =  ?"        
 
         return this.executarQuery(sql, id)
