@@ -40,6 +40,7 @@ class UsuariosModel{
     }
 
     async novoUsuario(usuario){
+        
         const sql = "INSERT INTO usuario SET ?"        
         const {senha} = usuario
         
@@ -48,17 +49,23 @@ class UsuariosModel{
 
         usuario.senha = hash
 
+        
+
         return this.executarQuery(sql, usuario)
     }
 
+    //criar metodo pra atualizar senha se necessario
     async atualizarUsuario(usuario, id){
-        const sql = "UPDATE usuario SET ? WHERE id_usuario = ?"        
+        const sql = "UPDATE usuario SET ? WHERE id_usuario = ?"     
         const { senha } = usuario
         
-        const salt = await bcrypt.genSalt(saltRound);
-        const hash = await bcrypt.hash(senha, salt);
-
-        usuario.senha = hash
+        if(senha){
+            const salt = await bcrypt.genSalt(saltRound);
+            const hash = await bcrypt.hash(senha, salt);
+    
+            usuario.senha = hash
+        }
+        
 
         return this.executarQuery(sql, [usuario, id])
     }

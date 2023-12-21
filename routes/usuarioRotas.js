@@ -21,7 +21,7 @@ router.put('/usuarios/atualizar/:id', (req, res) => {
     usuariosController.atualizarUsuario(req, res)
 })
 
-router.delete('/usuarios/deletar/:id', (req, res) => {
+router.delete('/usuarios/excluir/:id', (req, res) => {
     usuariosController.deletarUsuario(req, res)
 })
 
