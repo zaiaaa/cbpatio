@@ -1,9 +1,11 @@
 const usuariosController = require('../controller/usuariosController')
+const middleware = require('../middleware/auth')
+
 
 const {Router} = require('express')
 const router = Router()
 
-router.get('/usuarios', (req, res) => {
+router.get('/usuarios', middleware, (req, res) => {
     usuariosController.get(req, res)
 })
 

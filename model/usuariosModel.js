@@ -1,9 +1,7 @@
 const conn = require('../inc/conexao')
 const bcrypt = require('bcrypt');
-const { stack } = require('../routes/timeRotas');
 
 const saltRound = 10;
-const initHash = 'iusehbghu923h4g23hnfas0ijd1h2ju1120';
 
 
 class UsuariosModel{
