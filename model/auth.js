@@ -7,17 +7,22 @@ const saltRound = 10;
 class AuthModel{
     tryAuth(user, senha){
         return new Promise(async (res, rej) => {
-            
-            
             const salt = await bcrypt.genSalt(saltRound)
-            const hash = await bcrypt.hash(process.env.senha, salt)
+            const hash = await bcrypt.hash(process.env.SENHA, salt)
 
+            if(!(user && senha)){
+                rej("Usuário e senha não informados")
+            }
+
+            if(!user){
+                rej("Usuário e/ou senha não não existem")
+            }
             
             const usuarioPraLogin = {usuario: process.env.USER, senha: hash}
 
-            const isCorrectPassword = bcrypt.compare(senha, hash)
+            const isCorrectPassword = await bcrypt.compare(senha, usuarioPraLogin.senha)
 
-            if(user && user == usuarioPraLogin.usuario && isCorrectPassword){
+            if(user == usuarioPraLogin.usuario && isCorrectPassword){
                 const token = jwt.sign({
                     user
                 },
