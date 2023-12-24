@@ -35,6 +35,8 @@ CREATE TABLE Time_campeonato(
     id_time_campeonato INT PRIMARY KEY AUTO_INCREMENT,
     fk_id_time INT,
     fk_id_campeonato INT,
+    fase VARCHAR(20),
+    jogo VARCHAR(10),
     
     FOREIGN KEY (fk_id_campeonato) REFERENCES Campeonato (id_campeonato),
     FOREIGN KEY (fk_id_time) REFERENCES Time (id_time)
