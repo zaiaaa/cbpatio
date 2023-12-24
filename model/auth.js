@@ -35,3 +35,5 @@ class AuthModel{
         })
     }
 }
+
+module.exports = new AuthModel
