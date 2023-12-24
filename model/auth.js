@@ -6,19 +6,14 @@ const saltRound = 10;
 
 class AuthModel{
     tryAuth(user, senha){
-        return new Promise( async (res, rej) => {
-            if(!(user & senha)){
-                rej("Usuário e senha não informados.")
-            }
+        return new Promise(async (res, rej) => {
+            
             
             const salt = await bcrypt.genSalt(saltRound)
             const hash = await bcrypt.hash(process.env.senha, salt)
 
+            
             const usuarioPraLogin = {usuario: process.env.USER, senha: hash}
-
-            if(!user){
-                rej("Usuário e/ou senha não não existem")
-            }
 
             const isCorrectPassword = bcrypt.compare(senha, hash)
 
