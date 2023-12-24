@@ -1,6 +1,5 @@
 const conn = require('../inc/conexao')
 const bcrypt = require('bcrypt');
-const { stack } = require('../routes/timeRotas');
 
 const saltRound = 10;
 
