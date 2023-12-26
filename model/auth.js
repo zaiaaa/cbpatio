@@ -26,7 +26,7 @@ class AuthModel{
                 const token = jwt.sign({
                     user
                 },
-                process.env.SENHA
+                process.env.SECRET
                 )
                 res(token)
             }else{

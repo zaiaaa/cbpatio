@@ -9,7 +9,7 @@ const verifyToken = (req, res, next) => {
 
     try {
         const replace = token.replace("Bearer ", "")
-        jwt.verify(replace, process.env.SENHA)
+        jwt.verify(replace, process.env.SECRET)
         next()
     } catch (e) {
         console.log(e)
