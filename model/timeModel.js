@@ -5,8 +5,8 @@ class TimeModel{
         return new Promise((res, rej) => {
             conn.query(sql, parametros, (err, resp) => {
                 if(err){
-                    console.log('erro -> ', e)
-                    rej(e)
+                    console.log('erro -> ', err)
+                    rej(err)
                 }
                 res(resp)
             })
