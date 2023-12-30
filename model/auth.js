@@ -36,4 +36,44 @@ class AuthModel{
     }
 }
 
+class authUserModel{
+    tryAuthUser(user){
+        return new Promise(async (res, rej) => {
+            try {
+                console.log(user.id_usuario)
+
+                if(!user){
+                    rej("usuário ou senha não existem")
+                }
+
+                if(user){
+                    const token = jwt.sign({
+                        id: user.id_usuario,
+                        nome: user.nome_usuario,
+                        email: user.email
+                    },
+                    
+                    process.env.SECRET_LOG_USER,
+                    {
+                        expiresIn: "24h"
+                    })
+
+                    const headers = jwt.decode(token, process.env.SECRET_LOG_USER)
+                    //se necessário, passamos o header
+                    res(token)
+                }else{
+                    rej("Email ou senha incorretos!")
+                }
+            } catch (e) {
+                if (e.name === 'TokenExpiredError') {
+                    console.log('Token expirado');
+                  } else {
+                    console.error('Erro ao verificar o token:', e.message);
+                  }
+            }
+        })
+    }
+}
+
+module.exports = new authUserModel
 module.exports = new AuthModel
