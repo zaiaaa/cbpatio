@@ -8,8 +8,8 @@ class UsuariosController{
     }
 
     logUsuario(req, res){
-        const email = req.query.email
-        const senha = req.query.senha
+        const {email} = req.body
+        const {senha} = req.body
 
 
         usuariosModel.logUsuario(email, senha)

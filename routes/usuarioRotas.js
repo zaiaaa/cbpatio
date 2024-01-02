@@ -13,9 +13,8 @@ router.post('/usuarios/cadastrar', (req, res) => {
     usuariosController.novoUsuario(req, res)
 })
 
-router.get('/usuarios/login', (req, res) => {
-    //Requisição deve ser feita com /usuarios/login?email=email.com&senha=senha
-    //na parte de login do usuario, não é necessário o uso de jwt, mas para a visualização da api sim.
+router.post('/usuarios/login', (req, res) => {
+    //A requisição agora é POST, por ser infinitamente mais seguro.
     usuariosController.logUsuario(req, res)
 })
 
