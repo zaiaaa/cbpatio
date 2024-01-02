@@ -34,15 +34,17 @@ class AuthModel{
             }
         })
     }
-}
 
-class authUserModel{
-    tryAuthUser(user){
+    tryAuthUser(user = {}){
         return new Promise(async (res, rej) => {
             try {
                 console.log(user.id_usuario)
 
                 if(!user){
+                    rej("usuário ou senha não existem")
+                }
+
+                if(!user.email){
                     rej("usuário ou senha não existem")
                 }
 
@@ -67,13 +69,16 @@ class authUserModel{
             } catch (e) {
                 if (e.name === 'TokenExpiredError') {
                     console.log('Token expirado');
-                  } else {
-                    console.error('Erro ao verificar o token:', e.message);
-                  }
+                } else {
+                console.error('Erro ao verificar o token:', e.message);
+                }
+
+                console.log('erro -> ', e.message)
+
+                
             }
         })
     }
 }
 
-module.exports = new authUserModel
 module.exports = new AuthModel
