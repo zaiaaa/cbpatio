@@ -42,7 +42,7 @@ class UsuariosModel{
                 return 'email e/ou senha estão incorretos';
             }
         }catch(e){
-            console.log(e)
+            return `Não foi possível completar seu login -> ${e}`
         }
 
         //TODO refatorar essa bomba 
