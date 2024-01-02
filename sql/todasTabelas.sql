@@ -11,7 +11,10 @@ CREATE TABLE Usuario (
 
 CREATE TABLE Time (
     id_time INT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(30)
+    nome VARCHAR(30),
+    fk_id_capitao INT,
+
+    FOREIGN KEY (fk_id_capitao) REFERENCES Usuario (id_usuario)
 );
 
 CREATE TABLE Campeonato (
@@ -19,7 +22,10 @@ CREATE TABLE Campeonato (
     nome VARCHAR(60),
     data DATETIME,
     sinopse VARCHAR(120),
-    modalidade VARCHAR(20)
+    modalidade VARCHAR(20),
+    valor_entrada float,
+    premiacao float,
+    jogadores INT
 );
 
 CREATE TABLE Time_usuario (
@@ -41,3 +47,6 @@ CREATE TABLE Time_campeonato(
     FOREIGN KEY (fk_id_campeonato) REFERENCES Campeonato (id_campeonato),
     FOREIGN KEY (fk_id_time) REFERENCES Time (id_time)
 );
+
+CREATE TRIGGER `tgr_time_user` AFTER INSERT ON `time`
+FOR EACH ROW INSERT INTO time_usuario(fk_id_usuario, fk_id_time) VALUES(NEW.fk_id_capitao, NEW.id_time)
