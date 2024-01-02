@@ -36,7 +36,7 @@ class CampeonatoController {
         const campAtualizado = campeonatoModel.atualizarCampeonato(body, id)
 
         campAtualizado
-            .then((campAtualizado) => (res.status(200).json(campAtualizado)))
+            .then((campAtualizado) => (res.status(201).json(campAtualizado)))
             .catch((err) => (res.status(400).json(err)))
     }
 
