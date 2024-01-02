@@ -1,5 +1,6 @@
 const conn = require('../inc/conexao')
 const bcrypt = require('bcrypt');
+const auth = require('./auth');
 
 const saltRound = 10;
 
@@ -23,17 +24,27 @@ class UsuariosModel{
     }
 
     async logUsuario(email, senha){
-        const sql = "SELECT * FROM usuario WHERE email = ?"
-        const usuario = await this.executarQuery(sql, [email])
-        //console.log(usuario[0].senha)
-        const senhaBanco = usuario[0].senha
-        const isCorrectPassword = await bcrypt.compare(senha, senhaBanco)
-
-        if (isCorrectPassword) {
-            return usuario[0];
-        } else {
-            return 'senha errada';
+        try{
+            const sql = "SELECT * FROM usuario WHERE email = ?"
+            const usuario = await this.executarQuery(sql, [email])
+            console.log(usuario)
+            if(usuario.length === 0){
+                return "email e/ou senha estão incorretos"
+            }
+    
+            //console.log(usuario[0].senha)
+            const senhaBanco = usuario[0].senha
+            const isCorrectPassword = await bcrypt.compare(senha, senhaBanco)
+    
+            if (isCorrectPassword) {
+                return auth.tryAuthUser(usuario[0]);
+            } else {
+                return 'email e/ou senha estão incorretos';
+            }
+        }catch(e){
+            console.log(e)
         }
+
         //TODO refatorar essa bomba 
     }
 
