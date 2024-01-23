@@ -14,6 +14,24 @@ class ControllerTimeUsuario{
         .catch(err => res.status(400).json(err.message))
     }
 
+    convidarUsuarioParaTime(req, res){
+        const invite = req.body
+
+        modelTimeUsuario.convidarUsuarioParaTime(invite)
+        .then(time_usuario => res.status(201).json(time_usuario))
+        .catch(err => res.status(400).json(err.message))
+    }
+
+    aceitaConvite(req, res){
+        const {id_solicitacao} = req.params
+        const aceitou = req.body
+    
+        modelTimeUsuario.aceitaConvite(id_solicitacao, aceitou)
+        .then(time_usuario => res.status(201).json(time_usuario))
+        .catch(err => res.status(400).json(err.message))
+    }
+
+
     deletarUsuario_time(req, res){
         const {id_time} = req.params
         const {id_usuario} = req.params

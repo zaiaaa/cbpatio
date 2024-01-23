@@ -27,6 +27,16 @@ class Time_usuario{
         return this.executarQuery(sql, newUserTeam)
     }
 
+    convidarUsuarioParaTime(invite){
+        const sql = `INSERT INTO solicitacao_time_usuario SET ?`
+        return this.executarQuery(sql, invite)
+    }
+
+    aceitaConvite(id_solicitacao, aceitou){
+        const sql = `UPDATE solicitacao_time_usuario SET ? WHERE id_solicitacao = ?`
+        return this.executarQuery(sql, [aceitou, id_solicitacao])
+    }
+
     async deletarUsuario_time(id_time, id_user){
         const sql1 = "SELECT id_time_usuario FROM time_usuario WHERE fk_id_time = ? AND fk_id_usuario = ?"
         console.log(id_time, id_user)
