@@ -12,6 +12,7 @@ class CriarTabelas {
         this.criarTabelaCampeonato()
         this.criarTabelaTimeUsuario()
         this.criarTabelaTimeCampeonato()
+        this.criarTabelaSolicitacaoTime()
     }
 
     criarTabelaUsuario(){
@@ -117,6 +118,27 @@ class CriarTabelas {
             }
 
             console.log("Tabela TimeCampeonato criada com sucesso!")
+        });
+    }
+
+    criarTabelaSolicitacaoTime(){
+        const sql = `CREATE TABLE IF NOT EXISTS solicitacao_time_usuario(
+            id_solicitacao INT PRIMARY KEY AUTO_INCREMENT,
+            fk_id_usuario INT,
+            fk_id_time INT,
+            aceitou VARCHAR(1),
+            
+            FOREIGN KEY (fk_id_usuario) REFERENCES Usuario (id_usuario),
+            FOREIGN KEY (fk_id_time) REFERENCES Time (id_time)
+        );`
+
+        this.conn.query(sql, (error) => {
+            if (error) {
+                console.log(error)
+                return;
+            }
+
+            console.log("Tabela solicitacaoTimeUsuario criada com sucesso!")
         });
     }
 }

@@ -1,23 +1,28 @@
 const usuariosController = require('../controller/usuariosController')
+const middleware = require('../middleware/auth')
+const upload = require("../config/multer")
 
 const {Router} = require('express')
 const router = Router()
 
-router.get('/usuarios', (req, res) => {
+router.get('/usuarios', middleware, (req, res) => {
     usuariosController.get(req, res)
 })
 
-router.post('/usuarios/cadastrar', (req, res) => {
+router.get('/usuarios/:id', middleware, (req, res) => {
+    usuariosController.getById(req, res)
+})
+
+router.post('/usuarios/cadastrar', upload.single("foto"), (req, res) => {
     usuariosController.novoUsuario(req, res)
 })
 
-router.get('/usuarios/login', (req, res) => {
-    //Requisição deve ser feita com /usuarios/login?email=email.com&senha=senha
-    //na parte de login do usuario, não é necessário o uso de jwt, mas para a visualização da api sim.
+router.post('/usuarios/login', (req, res) => {
+    //A requisição agora é POST, por ser infinitamente mais seguro.
     usuariosController.logUsuario(req, res)
 })
 
-router.put('/usuarios/atualizar/:id', (req, res) => {
+router.put('/usuarios/atualizar/:id', upload.single("foto"), (req, res) => {
     usuariosController.atualizarUsuario(req, res)
 })
 
