@@ -1,6 +1,7 @@
 const { Router } = require('express')
 const router = Router()
 const campeonatoController = require('../controller/campeonatoController')
+const {uploadCampeonato} = require('../config/multer')
 
 router.get("/campeonatos", (req, res) => {
     campeonatoController.get(req, res)
@@ -11,12 +12,16 @@ router.get("/campeonatos/:nome", (req, res) => {
     campeonatoController.getByName(req, res)
 })
 
-router.post("/campeonatos/cadastrar", (req, res) => {
+router.get("/campeonatos/id/:id", (req, res) => {
+    campeonatoController.getById(req, res)
+})
+
+router.post("/campeonatos/cadastrar", uploadCampeonato.single("foto"), (req, res) => {
     campeonatoController.cadastrarCampeonato(req, res)
 })
 
 
-router.put("/campeonatos/atualizar/:id", (req, res) => {
+router.put("/campeonatos/atualizar/:id", uploadCampeonato.single("foto"), (req, res) => {
     campeonatoController.atualizarCampeonato(req, res)
 })
 
