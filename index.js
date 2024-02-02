@@ -1,12 +1,11 @@
+const cors = require('cors')
 const express = require('express')
 const app = express()
-const port = 3005 
+const port = 3005
+app.use(cors({})) 
 require('dotenv').config()
-
 const router = require('./routes/index')
-
 const criarTabelas = require("./inc/criarTabelas")
-
 const conn = require("./inc/conexao")
 
 
