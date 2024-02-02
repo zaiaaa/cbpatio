@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const port = 3005 
+const cors = require("cors")
 require('dotenv').config()
 
 const router = require('./routes/index')
@@ -9,7 +10,7 @@ const criarTabelas = require("./inc/criarTabelas")
 
 const conn = require("./inc/conexao")
 
-
+app.use(cors());
 
 router(app, express)
 criarTabelas.init(conn)
