@@ -1,7 +1,6 @@
 const { Router } = require('express')
 const router = Router()
 const campeonatoController = require('../controller/campeonatoController')
-const middleware = require('../middleware/auth')
 
 router.get("/campeonatos", (req, res) => {
     campeonatoController.get(req, res)
@@ -12,6 +11,11 @@ router.get("/campeonatos/:nome", (req, res) => {
     campeonatoController.getByName(req, res)
 })
 
+router.get("/campeonatos/id/:id", (req, res) => {
+    campeonatoController.getById(req, res)
+})
+
+router.post("/campeonatos/cadastrar", uploadCampeonato.single("foto"), (req, res) => {
 
 //rotas que é obirgatio o login do admin
 router.post("/campeonatos/cadastrar",  middleware, (req, res) => {
@@ -19,7 +23,7 @@ router.post("/campeonatos/cadastrar",  middleware, (req, res) => {
 })
 
 
-router.put("/campeonatos/atualizar/:id",middleware, (req, res) => {
+router.put("/campeonatos/atualizar/:id", (req, res) => {
     campeonatoController.atualizarCampeonato(req, res)
 })
 

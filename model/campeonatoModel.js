@@ -24,6 +24,11 @@ class CamepeonatoModel{
         return this.executarQuery(sql, `%${nome}%`)
     }
 
+    getById(id){
+        const sql = "SELECT * FROM Campeonato WHERE id_campeonato = ?"
+        return this.executarQuery(sql, id)
+    }
+
     cadastrarCampeonato(body){
         const sql = "INSERT INTO Campeonato SET ?"
         return this.executarQuery(sql, body)

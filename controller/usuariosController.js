@@ -29,7 +29,7 @@ class UsuariosController{
         const usuario = req.body
         const foto = req.file
 
-        usuario.foto = foto.path
+        !foto?.path ? "" : usuario.foto = foto?.path
 
 
         usuariosModel.novoUsuario(usuario)
@@ -42,18 +42,16 @@ class UsuariosController{
         const userJson = await usuariosModel.getById(id)
         const userFoto = userJson[0].foto
         const path = userFoto.replace(/\\/g, "/")
-        console.log(path)
         if(fs.existsSync(path)){
             fs.unlink(path, (err) => {
                 if(err) console.log(err)
-                console.log(`Foto ${path} excluida com sucesso`)
             })
         }
 
         const usuario = req.body
         const foto = req.file
 
-        usuario.foto = foto.path
+        !foto?.path ? "" : usuario.foto = foto?.path
 
         usuariosModel.atualizarUsuario(usuario, id)
         .then(usuarioAtualizado => res.status(200).json(usuarioAtualizado))

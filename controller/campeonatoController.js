@@ -1,4 +1,5 @@
 const campeonatoModel = require('../model/campeonatoModel')
+const fs = require('fs')
 
 class CampeonatoController {
     get(req, res) {
@@ -21,21 +22,43 @@ class CampeonatoController {
 
     }
 
+    getById(req, res){
+        const {id} = req.params 
+        campeonatoModel.getById(id)
+        .then(campeonatos => res.status(200).json(campeonatos))
+        .catch(err => res.status(400).json(err.message))
+    }
+
     cadastrarCampeonato(req, res) {
         const body = req.body
+        const foto = req.file
+        !foto?.path ? "" : body.foto = foto.path
+        
+        
         const campCadastrado = campeonatoModel.cadastrarCampeonato(body)
-
         campCadastrado
             .then((campCadastrado) => (res.status(201).json(campCadastrado)))
             .catch((err) => (res.status(400).json(err)))
     }
 
-    atualizarCampeonato(req, res) {
-        const body = req.body
+    async atualizarCampeonato(req, res) {
         const { id } = req.params
+        const campJson = await campeonatoModel.getById(id)
+        const campFoto = campJson[0].foto
+        const path = campFoto.replace(/\\/g, "/")
+        if(fs.existsSync(path)){
+            fs.unlink(path, (err) => {
+                if(err) console.log(err)
+            })
+        }
+        
+        
+        const body = req.body
+        const foto = req.file
+
+        !foto?.path ? "" : body.foto = foto.path
 
         const campAtualizado = campeonatoModel.atualizarCampeonato(body, id)
-
         campAtualizado
             .then((campAtualizado) => (res.status(201).json(campAtualizado)))
             .catch((err) => (res.status(400).json(err)))
