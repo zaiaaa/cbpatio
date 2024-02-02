@@ -1,13 +1,8 @@
 const cors = require('cors')
 const express = require('express')
 const app = express()
-<<<<<<< HEAD
 const port = 3005
 app.use(cors({})) 
-=======
-const port = 3005 
-const cors = require("cors")
->>>>>>> aa726c8c7a8e34e9eac9b4fb3daa84a21c01dc7a
 require('dotenv').config()
 const router = require('./routes/index')
 const criarTabelas = require("./inc/criarTabelas")
