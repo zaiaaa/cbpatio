@@ -68,7 +68,6 @@ class UsuariosModel{
         return this.executarQuery(sql, usuario)
     }
 
-    //criar metodo pra atualizar senha se necessario
     async atualizarUsuario(usuario, id){
         const sql = "UPDATE usuario SET ? WHERE id_usuario = ?"     
         const { senha } = usuario

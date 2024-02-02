@@ -11,6 +11,7 @@ class CampeonatoController {
 
     getByName(req, res) {
         const { nome } = req.params
+        if(!nome) return res.status(400).json({message: "Nome não informado!"})
 
         const listagemDeCampeonatosPeloNome = campeonatoModel.getByName(nome)
 

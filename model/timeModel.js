@@ -24,6 +24,7 @@ class TimeModel{
     }
 
     novoTime(time){
+        //quando gerar um novo time, adicionar todos os integrantes na tabela usuario time
         const sql = "INSERT INTO time SET ?"
         return this.executarQuery(sql, time)
     }
