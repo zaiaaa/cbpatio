@@ -12,11 +12,10 @@ require('dotenv').config()
 const router = require('./routes/index')
 const criarTabelas = require("./inc/criarTabelas")
 const conn = require("./inc/conexao")
-
-app.use(cors());
-
 router(app, express)
 criarTabelas.init(conn)
+
+app.use('/fotoCampeonatos', express.static('./fotoCampeonatos'));
 
 
 app.get('/', (req, res) => {
