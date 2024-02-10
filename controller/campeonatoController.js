@@ -44,19 +44,23 @@ class CampeonatoController {
     async atualizarCampeonato(req, res) {
         const { id } = req.params
         const campJson = await campeonatoModel.getById(id)
-        const campFoto = campJson[0].foto
-        const path = campFoto.replace(/\\/g, "/")
-        if(fs.existsSync(path)){
-            fs.unlink(path, (err) => {
-                if(err) console.log(err)
-            })
+        const body = req.body
+        const foto = req.file
+        
+        !foto?.path ? "" : body.foto = foto.path
+
+        if(foto?.path){
+            const campFoto = campJson[0].foto
+            const path = campFoto.replace(/\\/g, "/")
+            if(fs.existsSync(path)){
+                fs.unlink(path, (err) => {
+                    if(err) console.log(err)
+                })
+            }
         }
         
         
-        const body = req.body
-        const foto = req.file
 
-        !foto?.path ? "" : body.foto = foto.path
 
         const campAtualizado = campeonatoModel.atualizarCampeonato(body, id)
         campAtualizado
