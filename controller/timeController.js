@@ -17,6 +17,14 @@ class timeController{
         .catch(err => res.status(400).json(err.message))
     }
 
+    getById(req, res){
+        const {id} = req.params
+
+        timeModel.getById(id)
+        .then(times => res.status(200).json(times))
+        .catch(err => res.status(400).json(err.message))
+    }
+
     novoTime(req, res){
         const novoTime = req.body
 
