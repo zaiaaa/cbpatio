@@ -10,6 +10,14 @@ router.get('/campeonatos/time/times', (req, res) => {
     time_campeonatoController.getTimes_campeonato(req, res)
 })
 
+router.get('/campeonatos/time/times/:id', (req, res) => [
+    time_campeonatoController.getTimes_porCampeonato(req, res)
+])
+
+router.get('/campeonatos/time/times/fase/:fase', (req, res) => {
+    time_campeonatoController.getTimesPorFase(req, res)
+})
+
 router.put('/campeonatos/time/alterarTime/:id', (req, res) => {
     time_campeonatoController.alteraTime_campeonato(req, res)
 })

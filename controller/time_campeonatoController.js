@@ -15,6 +15,20 @@ class ControllerTimeCampeonato{
         .catch(err => res.status(400).json(err.message))
     }
 
+    getTimes_porCampeonato(req, res){
+        const {id} = req.params
+        modelTimeCampeonato.getTimesPorCamp(id)
+        .then(time_campeonato => res.status(200).json(time_campeonato))
+        .catch(err => res.status(400).json(err.message))
+    }
+
+    getTimesPorFase(req, res){
+        const {fase} = req.params
+        modelTimeCampeonato.getTimesPorFase(fase)
+        .then(time_campeonato => res.status(200).json(time_campeonato))
+        .catch(err => res.status(400).json(err.message))
+    }
+
     alteraTime_campeonato(req, res){
         const time_campeonatoAlterado = req.body 
         const {id} = req.params

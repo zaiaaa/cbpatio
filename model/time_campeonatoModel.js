@@ -31,6 +31,16 @@ class Time_campeonato{
         return this.executarQuery(sql)
     }
 
+    getTimesPorCamp(id){
+        const sql = `SELECT * FROM time_campeonato WHERE fk_id_campeonato = ?`
+        return this.executarQuery(sql, id)
+    }
+
+    getTimesPorFase(fase){
+        const sql = `SELECT * FROM time_campeonato WHERE fase = ?`
+        return this.executarQuery(sql, fase)
+    }
+
     novoTime_campeonato(newTeam){
         const sql = "INSERT INTO time_campeonato SET ?"
 
