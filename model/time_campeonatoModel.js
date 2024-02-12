@@ -41,6 +41,11 @@ class Time_campeonato{
         return this.executarQuery(sql, fase)
     }
 
+    getTimesPorChave(chave){
+        const sql = `SELECT * FROM time_campeonato WHERE chave = ? ORDER BY jogo`
+        return this.executarQuery(sql, chave)
+    }
+
     novoTime_campeonato(newTeam){
         const sql = "INSERT INTO time_campeonato SET ?"
 

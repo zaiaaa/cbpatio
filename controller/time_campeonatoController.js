@@ -29,6 +29,14 @@ class ControllerTimeCampeonato{
         .catch(err => res.status(400).json(err.message))
     }
 
+    getTimesPorChave(req, res){
+        const {chave} = req.params
+
+        modelTimeCampeonato.getTimesPorChave(chave)
+        .then(time_campeonato => res.status(200).json(time_campeonato))
+        .catch(err => res.status(400).json(err.message))
+    }
+
     alteraTime_campeonato(req, res){
         const time_campeonatoAlterado = req.body 
         const {id} = req.params
