@@ -35,10 +35,11 @@ class Time_campeonato{
         const sql = `SELECT id_time_campeonato,
         t.id_time as id_time,
         t.nome as nome_time,
+        tc.fase as fase,
            fk_id_campeonato as id_campeonato
                FROM time_campeonato tc INNER JOIN time t ON tc.fk_id_time = t.id_time 
                INNER JOIN campeonato c ON tc.fk_id_campeonato = c.id_campeonato 
-               INNER JOIN usuario u on t.fk_id_capitao = u.id_usuario WHERE id_time = ?`
+               INNER JOIN usuario u on t.fk_id_capitao = u.id_usuario WHERE id_time = ? ORDER BY id_time_campeonato DESC LIMIT 1`
 
         return this.executarQuery(sql, id)
     }
