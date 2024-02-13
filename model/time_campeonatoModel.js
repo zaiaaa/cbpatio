@@ -31,19 +31,31 @@ class Time_campeonato{
         return this.executarQuery(sql)
     }
 
+    getNomeTime(id){
+        const sql = `SELECT id_time_campeonato,
+        t.id_time as id_time,
+        t.nome as nome_time,
+           fk_id_campeonato as id_campeonato
+               FROM time_campeonato tc INNER JOIN time t ON tc.fk_id_time = t.id_time 
+               INNER JOIN campeonato c ON tc.fk_id_campeonato = c.id_campeonato 
+               INNER JOIN usuario u on t.fk_id_capitao = u.id_usuario WHERE id_time = ?`
+
+        return this.executarQuery(sql, id)
+    }
+
     getTimesPorCamp(id){
         const sql = `SELECT * FROM time_campeonato WHERE fk_id_campeonato = ?`
         return this.executarQuery(sql, id)
     }
 
-    getTimesPorFase(fase){
-        const sql = `SELECT * FROM time_campeonato WHERE fase = ?`
-        return this.executarQuery(sql, fase)
+    getTimesPorFase(fase, idCamp){
+        const sql = `SELECT * FROM time_campeonato WHERE fase = ? AND fk_id_campeonato = ?`
+        return this.executarQuery(sql, [fase, idCamp])
     }
 
-    getTimesPorChave(chave){
-        const sql = `SELECT * FROM time_campeonato WHERE chave = ? ORDER BY jogo`
-        return this.executarQuery(sql, chave)
+    getTimesPorChave(chave, idCamp, fase){
+        const sql = `SELECT * FROM time_campeonato WHERE chave = ? AND fk_id_campeonato = ? AND fase = ? ORDER BY jogo`
+        return this.executarQuery(sql, [chave, idCamp, fase])
     }
 
     novoTime_campeonato(newTeam){

@@ -23,16 +23,24 @@ class ControllerTimeCampeonato{
     }
 
     getTimesPorFase(req, res){
-        const {fase} = req.params
-        modelTimeCampeonato.getTimesPorFase(fase)
+        const {fase, idCamp} = req.params
+        modelTimeCampeonato.getTimesPorFase(fase, idCamp)
         .then(time_campeonato => res.status(200).json(time_campeonato))
         .catch(err => res.status(400).json(err.message))
     }
 
     getTimesPorChave(req, res){
-        const {chave} = req.params
+        const {chave, idCamp, fase} = req.params
 
-        modelTimeCampeonato.getTimesPorChave(chave)
+        modelTimeCampeonato.getTimesPorChave(chave, idCamp, fase)
+        .then(time_campeonato => res.status(200).json(time_campeonato))
+        .catch(err => res.status(400).json(err.message))
+    }
+
+    getNomeTime(req, res){
+        const {id} = req.params
+
+        modelTimeCampeonato.getNomeTime(id)
         .then(time_campeonato => res.status(200).json(time_campeonato))
         .catch(err => res.status(400).json(err.message))
     }
