@@ -61,6 +61,14 @@ class ControllerTimeCampeonato{
         .then(deleted => res.status(200).json(deleted))
         .catch(err => res.status(400).json(err))
     }
+
+    resetarFase(req, res){
+        const {fase, idCamp} = req.params
+
+        modelTimeCampeonato.resetarFase(fase, idCamp)
+        .then(deleted => res.status(200).json(deleted))
+        .catch(err => res.status(400).json(err))
+    }
 }
 
 module.exports = new ControllerTimeCampeonato()

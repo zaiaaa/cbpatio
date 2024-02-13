@@ -34,4 +34,8 @@ router.delete('/campeonatos/time/deletar/:id', (req, res) => {
     time_campeonatoController.deletarTime_campeonato(req, res)
 })
 
+router.delete('/campeonatos/resetar/fase/:fase/:idCamp', (req, res) => {
+    time_campeonatoController.resetarFase(req, res)
+})
+
 module.exports = router

@@ -77,6 +77,12 @@ class Time_campeonato{
         return this.executarQuery(sql, id)
     }
 
+    resetarFase(fase, idCamp){
+        const sql = `DELETE FROM time_campeonato WHERE fase = ? AND fk_id_campeonato = ?`
+
+        return this.executarQuery(sql, [fase, idCamp])
+    }
+
 }   
 
 module.exports = new Time_campeonato
