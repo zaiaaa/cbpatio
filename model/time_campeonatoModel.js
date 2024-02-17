@@ -45,7 +45,10 @@ class Time_campeonato{
     }
 
     getTimesPorCamp(id){
-        const sql = `SELECT * FROM time_campeonato WHERE fk_id_campeonato = ?`
+        const sql = `
+        SELECT id_time_campeonato, fk_id_time, fk_id_campeonato, nome, fase, jogo, chave FROM time_campeonato tc
+        INNER JOIN time t ON t.id_time = tc.fk_id_time  
+        WHERE fk_id_campeonato = 1`
         return this.executarQuery(sql, id)
     }
 
