@@ -26,6 +26,10 @@ router.get('/campeonatos/time/times/nome/ids/:id', (req, res) => {
     time_campeonatoController.getNomeTime(req, res)
 })
 
+router.get('/campeonatos/time/times/eliminados/:id', (req, res) => {
+    time_campeonatoController.getEliminados(req, res)
+})
+
 router.put('/campeonatos/time/alterarTime/:id', (req, res) => {
     time_campeonatoController.alteraTime_campeonato(req, res)
 })

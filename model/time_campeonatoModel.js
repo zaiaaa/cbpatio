@@ -53,13 +53,46 @@ class Time_campeonato{
     }
 
     getTimesPorFase(fase, idCamp){
-        const sql = `SELECT * FROM time_campeonato WHERE fase = ? AND fk_id_campeonato = ?`
+        const sql = `
+        SELECT * FROM time_campeonato tc
+        INNER JOIN time t ON tc.fk_id_time = t.id_time 
+        WHERE fase = ? 
+        AND fk_id_campeonato = ?
+        `
         return this.executarQuery(sql, [fase, idCamp])
     }
 
     getTimesPorChave(chave, idCamp, fase){
-        const sql = `SELECT * FROM time_campeonato WHERE chave = ? AND fk_id_campeonato = ? AND fase = ? ORDER BY jogo`
+        const sql = `SELECT * FROM time_campeonato tc
+        INNER JOIN time t
+        ON tc.fk_id_time = t.id_time 
+        WHERE chave = ?
+        AND fk_id_campeonato = ? 
+        AND fase = ? 
+        ORDER BY jogo`
         return this.executarQuery(sql, [chave, idCamp, fase])
+    }
+
+    getEliminados(jogo, idCampeonato, faseAtual, faseAnterior, chave){
+        const sql = `
+        SELECT *
+        FROM time_campeonato AS tco
+        WHERE jogo = ?
+          AND fk_id_campeonato = ?
+          AND fase = ?
+          AND chave = ?
+          AND NOT EXISTS (
+              SELECT 1
+              FROM time_campeonato AS tcq
+              WHERE tcq.fk_id_campeonato = ?
+                AND tcq.fase = ?
+                AND tcq.chave = ?
+                AND tcq.fk_id_time = tco.fk_id_time
+          )`
+
+          console.log(sql)
+
+          return this.executarQuery(sql, [jogo, idCampeonato, faseAnterior, chave, idCampeonato, faseAtual, chave])
     }
 
     novoTime_campeonato(newTeam){
