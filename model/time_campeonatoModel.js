@@ -73,7 +73,7 @@ class Time_campeonato{
         return this.executarQuery(sql, [chave, idCamp, fase])
     }
 
-    getEliminados(jogo, idCampeonato, faseAtual, faseAnterior, chave, chaveTarget){
+    getEliminadosPorJogo(jogo, idCampeonato, faseAtual, faseAnterior, chave, chaveTarget){
         const sql = `
         SELECT *
         FROM time_campeonato AS tco

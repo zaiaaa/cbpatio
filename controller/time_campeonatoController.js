@@ -45,11 +45,11 @@ class ControllerTimeCampeonato{
         .catch(err => res.status(400).json(err.message))
     }
 
-    getEliminados(req, res){
+    getEliminadosPorJogo(req, res){
         const {id} = req.params
         const {jogo, faseAnterior, faseAtual, chave, chaveTarget} = req.query
 
-        modelTimeCampeonato.getEliminados(jogo, id, faseAtual, faseAnterior, chave, chaveTarget)
+        modelTimeCampeonato.getEliminadosPorJogo(jogo, id, faseAtual, faseAnterior, chave, chaveTarget)
         .then(time_campeonato => res.status(200).json(time_campeonato))
         .catch(err => res.status(400).json(err.message))
     }
