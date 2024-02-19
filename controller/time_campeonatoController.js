@@ -47,9 +47,9 @@ class ControllerTimeCampeonato{
 
     getEliminados(req, res){
         const {id} = req.params
-        const {jogo, faseAnterior, faseAtual, chave} = req.query
+        const {jogo, faseAnterior, faseAtual, chave, chaveTarget} = req.query
 
-        modelTimeCampeonato.getEliminados(jogo, id, faseAtual, faseAnterior, chave)
+        modelTimeCampeonato.getEliminados(jogo, id, faseAtual, faseAnterior, chave, chaveTarget)
         .then(time_campeonato => res.status(200).json(time_campeonato))
         .catch(err => res.status(400).json(err.message))
     }

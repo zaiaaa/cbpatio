@@ -48,7 +48,7 @@ class Time_campeonato{
         const sql = `
         SELECT id_time_campeonato, fk_id_time, fk_id_campeonato, nome, fase, jogo, chave FROM time_campeonato tc
         INNER JOIN time t ON t.id_time = tc.fk_id_time  
-        WHERE fk_id_campeonato = 1`
+        WHERE fk_id_campeonato = ?`
         return this.executarQuery(sql, id)
     }
 
@@ -73,7 +73,7 @@ class Time_campeonato{
         return this.executarQuery(sql, [chave, idCamp, fase])
     }
 
-    getEliminados(jogo, idCampeonato, faseAtual, faseAnterior, chave){
+    getEliminados(jogo, idCampeonato, faseAtual, faseAnterior, chave, chaveTarget){
         const sql = `
         SELECT *
         FROM time_campeonato AS tco
@@ -84,15 +84,15 @@ class Time_campeonato{
           AND NOT EXISTS (
               SELECT 1
               FROM time_campeonato AS tcq
-              WHERE tcq.fk_id_campeonato = ?
+              WHERE tcq.fk_id_campeonato = ? 
                 AND tcq.fase = ?
                 AND tcq.chave = ?
                 AND tcq.fk_id_time = tco.fk_id_time
           )`
 
-          console.log(sql)
+          //console.log(sql)
 
-          return this.executarQuery(sql, [jogo, idCampeonato, faseAnterior, chave, idCampeonato, faseAtual, chave])
+          return this.executarQuery(sql, [jogo, idCampeonato, faseAnterior, chave, idCampeonato, faseAtual, chaveTarget])
     }
 
     novoTime_campeonato(newTeam){
