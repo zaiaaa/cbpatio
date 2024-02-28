@@ -54,6 +54,15 @@ class ControllerTimeCampeonato{
         .catch(err => res.status(400).json(err.message))
     }
 
+    setGameDateTime(req, res){
+        const {idCamp, jogo, fase, chave} = req.params
+        const data_hora = req.body
+
+        modelTimeCampeonato.setGameDateTime(data_hora, idCamp, jogo, fase, chave)
+        .then((time_campeonato) => (res.status(201).json(time_campeonato)))
+        .catch((err) => (res.status(400).json(err)))
+    }
+
     alteraTime_campeonato(req, res){
         const time_campeonatoAlterado = req.body 
         const {id} = req.params
