@@ -71,6 +71,14 @@ class ControllerTimeCampeonato{
         .catch((err) => (res.status(400).json(err)))
     }
 
+    getCapitaoPorFase(req, res){
+        const {id_camp, fase} = req.params
+
+        modelTimeCampeonato.getCapitaoPorFase(id_camp, fase)
+        .then((time_campeonato) => (res.status(200).json(time_campeonato)))
+        .catch((err) => (res.status(400).json(err)))
+    } 
+
     alteraTime_campeonato(req, res){
         const time_campeonatoAlterado = req.body 
         const {id} = req.params

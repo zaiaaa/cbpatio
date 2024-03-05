@@ -105,6 +105,16 @@ class Time_campeonato{
           return this.executarQuery(sql, id_camp)
     }
 
+    getCapitaoPorFase(id_camp, fase){
+        const sql = `SELECT t.id_time, u.nome as nome_usuario, u.celular, t.nome as nome_time FROM time_campeonato tc 
+        INNER JOIN time t ON t.id_time = tc.fk_id_time
+        INNER JOIN usuario u ON u.id_usuario = t.fk_id_capitao
+        WHERE tc.fk_id_campeonato = ? AND tc.fase = ?
+          `
+
+          return this.executarQuery(sql, [id_camp, fase])
+    }
+
     novoTime_campeonato(newTeam){
         const sql = "INSERT INTO time_campeonato SET ?"
 
