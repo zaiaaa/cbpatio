@@ -4,6 +4,7 @@ const rotasUsuarios = require('./usuarioRotas')
 const authRota = require('./auth')
 const time_usuariosRota = require('./time_usuarioRotas')
 const time_campeonatosRota = require('./time_campeonatoRotas')
+const liveonRoute = require("./liveOnRoute")
 
 module.exports = (app, express) => {
     app.use(express.json())
@@ -14,4 +15,5 @@ module.exports = (app, express) => {
     app.use(authRota)
     app.use(time_usuariosRota)
     app.use(time_campeonatosRota)
+    app.use(liveonRoute)
 }
