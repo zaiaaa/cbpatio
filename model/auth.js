@@ -35,6 +35,18 @@ class AuthModel{
         })
     }
 
+    checkToken(token){
+        return new Promise((res, rej) => {
+            try {
+                const replace = token.replace("Bearer ", "")
+                jwt.verify(replace, process.env.SECRET)
+                res("Token OK")
+            } catch (e) {
+                res("Token Inválido")
+            }
+        })
+    }
+
     tryAuthUser(user = {}){
         return new Promise(async (res, rej) => {
             try {

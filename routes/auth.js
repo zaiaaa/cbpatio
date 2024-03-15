@@ -10,4 +10,8 @@ router.post('/login', (req, res) => {
     .catch(err => res.status(400).json(err))
 })
 
+router.get('/login/token/:token', (req, res) => {
+    authenticate.AuthToken(req, res)    
+})
+
 module.exports = router
