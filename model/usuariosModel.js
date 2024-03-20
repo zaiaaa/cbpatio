@@ -62,7 +62,7 @@ class UsuariosModel{
         const existsEmail = await this.executarQuery(sqlEmail, email)
         if(existsEmail){
             console.log(existsEmail)
-            return
+            return {"message": "email já cadastrado"}
         }
 
 
