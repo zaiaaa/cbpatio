@@ -3,7 +3,7 @@ const express = require('express')
 const app = express()
 const port = 3005
 app.use(cors({
-    origin: "http://localhost:5173",
+    origin: ["http://localhost:5174", "http://localhost:5173"],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     optionsSuccessStatus: 204,
