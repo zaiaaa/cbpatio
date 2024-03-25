@@ -34,20 +34,21 @@ class UsuariosModel{
             const usuario = await this.executarQuery(sql, [email])
             console.log(usuario)
             if(usuario.length === 0){
-                return "email e/ou senha estão incorretos"
+                return 
             }
     
             //console.log(usuario[0].senha)
             const senhaBanco = usuario[0].senha
             const isCorrectPassword = await bcrypt.compare(senha, senhaBanco)
     
+            console.log(isCorrectPassword)
             if (isCorrectPassword) {
                 return auth.tryAuthUser(usuario[0]);
             } else {
-                return 'email e/ou senha estão incorretos';
+                return 
             }
         }catch(e){
-            return `Não foi possível completar seu login -> ${e}`
+            return e.message
         }
 
         //TODO refatorar essa bomba 
@@ -60,7 +61,8 @@ class UsuariosModel{
         
         const sqlEmail = "SELECT * FROM usuario WHERE email = ?"
         const existsEmail = await this.executarQuery(sqlEmail, email)
-        if(existsEmail){
+
+        if(existsEmail.length > 0){
             console.log(existsEmail)
             return {"message": "email já cadastrado"}
         }
