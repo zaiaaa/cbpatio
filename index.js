@@ -16,7 +16,7 @@ router(app, express)
 criarTabelas.init(conn)
 
 app.use('/fotoCampeonatos', express.static('./fotoCampeonatos'));
-
+app.use('/fotoUsuarios', express.static('./fotoUsuarios'));
 
 app.get('/', (req, res) => {
     res.send({
