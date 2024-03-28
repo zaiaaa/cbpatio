@@ -28,6 +28,11 @@ class TimeModel{
         return this.executarQuery(sql, id)
     }
 
+    getByCaptain(id_captain){
+        const sql = "SELECT * FROM time WHERE fk_id_capitao = ?"
+        return this.executarQuery(sql, id_captain)
+    }
+
     novoTime(time){
         //quando gerar um novo time, adicionar todos os integrantes na tabela usuario time
         const sql = "INSERT INTO time SET ?"

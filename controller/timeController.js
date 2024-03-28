@@ -25,6 +25,14 @@ class timeController{
         .catch(err => res.status(400).json(err.message))
     }
 
+    getByCaptain(req, res){
+        const {id_capitao} = req.params
+
+        timeModel.getByCaptain(id_capitao)
+        .then(time => res.status(200).json(time))
+        .catch(err => res.status(400).json(err.message))
+    }
+
     novoTime(req, res){
         const novoTime = req.body
 

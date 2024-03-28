@@ -15,6 +15,10 @@ router.get('/times/time/:id', (req, res) => {
     timeController.getById(req, res)
 })
 
+router.get('/times/time/capitao/:id_capitao', (req, res) => {
+    timeController.getByCaptain(req, res)
+})
+
 router.post('/times/cadastrar', (req, res) => {
     timeController.novoTime(req, res)
 })
