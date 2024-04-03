@@ -57,16 +57,23 @@ class UsuariosModel{
     async novoUsuario(usuario){
         
         const sql = "INSERT INTO usuario SET ?"        
-        const {senha, email} = usuario
+        const {senha, email, nome_usuario} = usuario
         
         const sqlEmail = "SELECT * FROM usuario WHERE email = ?"
         const existsEmail = await this.executarQuery(sqlEmail, email)
 
-        if(existsEmail.length > 0){
-            console.log(existsEmail)
-            return {"message": "email já cadastrado"}
+        const slqUsername = "SELECT * FROM usuario WHERE nome_usuario = ?"
+        const existUsername = await this.executarQuery(slqUsername, nome_usuario)
+
+        if(existUsername.length > 0){
+            console.log(existUsername)
+            return {"message": "Nome de usuário já cadastrado!"}
         }
 
+        if(existsEmail.length > 0){
+            console.log(existsEmail)
+            return {"message": "Email já cadastrado!"}
+        }
 
         const salt = await bcrypt.genSalt(saltRound);
         const hash = await bcrypt.hash(senha, salt);
