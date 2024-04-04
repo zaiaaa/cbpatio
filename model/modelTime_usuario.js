@@ -22,6 +22,11 @@ class Time_usuario{
         return this.executarQuery(sql)
     }
 
+    getConvites(id){
+        const sql = `SELECT id_solicitacao, fk_id_usuario, aceitou, t.nome as nome_time, id_time, u.nome as nome_do_usuario, nome_usuario, hora_envio FROM solicitacao_time_usuario s INNER JOIN time t on s.fk_id_time = t.id_time INNER JOIN usuario u on t.fk_id_capitao = u.id_usuario WHERE s.fk_id_usuario = ? AND s.aceitou = 'n'`
+        return this.executarQuery(sql, id)
+    }
+
     novoUsuarioNoTime(newUserTeam){
         const sql = `INSERT INTO time_usuario SET ?`
         return this.executarQuery(sql, newUserTeam)
@@ -45,6 +50,11 @@ class Time_usuario{
         const jogadorBanido = jogador[0].id_time_usuario
         const sql = `DELETE FROM time_usuario WHERE id_time_usuario = ?`
         return this.executarQuery(sql, jogadorBanido)
+    }
+
+    recusarConvite(id){
+        const sql = "DELETE FROM solicitacao_time_usuario WHERE id_solicitacao = ?"
+        return this.executarQuery(sql, id)
     }
 
 

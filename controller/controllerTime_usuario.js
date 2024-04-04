@@ -1,9 +1,17 @@
+const modelTime_usuario = require('../model/modelTime_usuario')
 const modelTimeUsuario = require('../model/modelTime_usuario')
 
 class ControllerTimeUsuario{
     get(req, res){
         modelTimeUsuario.get()
         .then(time_usuario => res.status(200).json(time_usuario))
+        .catch(err => res.status(400).json(err.message))
+    }
+
+    getConvites(req, res){
+        const {id} = req.params
+        modelTimeUsuario.getConvites(id)
+        .then(solicitacao => res.status(200).json(solicitacao))
         .catch(err => res.status(400).json(err.message))
     }
 
@@ -40,6 +48,15 @@ class ControllerTimeUsuario{
         modelTimeUsuario.deletarUsuario_time(id_time, id_usuario)
         .then(time_usuario => res.status(204).json(time_usuario))
         .catch(err => res.status(400).json(err.message))
+    }
+
+    recusarConvite(req, res){
+        const {id} = req.params
+
+        modelTimeUsuario.recusarConvite(id)
+        .then(() => res.status(204).json({msg: "Recusado com sucesso!"}))
+        .catch(err => res.status(400).json(err.message))
+
     }
 }
 
