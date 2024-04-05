@@ -33,9 +33,17 @@ class TimeModel{
         return this.executarQuery(sql, id_captain)
     }
 
-    novoTime(time){
+    async novoTime(time){
         //quando gerar um novo time, adicionar todos os integrantes na tabela usuario time
         const sql = "INSERT INTO time SET ?"
+
+        const sqlVerifica = `SELECT * FROM time WHERE nome = ?`
+        const existsName = await this.executarQuery(sqlVerifica, time.nome)
+
+        if(existsName.length > 0){
+            return {message: "Este nome de time já está cadastrado."}
+        }
+
         return this.executarQuery(sql, time)
     }
 
