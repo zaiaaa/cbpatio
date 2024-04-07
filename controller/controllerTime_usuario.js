@@ -8,6 +8,13 @@ class ControllerTimeUsuario{
         .catch(err => res.status(400).json(err.message))
     }
 
+    getByIdTime(req, res){
+        const { id_time } = req.params
+        modelTimeUsuario.getByIdTime(id_time)
+        .then(time_usuario => res.status(200).json(time_usuario))
+        .catch(err => res.status(400).json(err.message))
+    }
+
     getConvites(req, res){
         const {id} = req.params
         modelTimeUsuario.getConvites(id)

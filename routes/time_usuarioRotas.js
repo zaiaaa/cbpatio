@@ -6,6 +6,11 @@ router.get('/usuarios/time', (req, res) => {
     time_usuarioController.get(req, res)
 })
 
+router.get('/usuarios/time/:id_time', (req, res) => {
+    time_usuarioController.getByIdTime(req, res)
+})
+
+
 router.get('/usuarios/time/convite/:id', (req, res) => {
     time_usuarioController.getConvites(req, res)
 })
