@@ -15,6 +15,13 @@ class UsuariosController{
         .catch(err => res.status(400).json(err.message))
     }
 
+    getByUsername(req, res){
+        const {nome_usuario} = req.params
+        usuariosModel.getByUsername(nome_usuario)        
+        .then(users => res.status(200).json(users))
+        .catch(err => res.status(400).json(err.message))
+    }
+
     logUsuario(req, res){
         const {email} = req.body
         const {senha} = req.body

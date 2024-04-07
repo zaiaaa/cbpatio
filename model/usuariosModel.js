@@ -28,6 +28,11 @@ class UsuariosModel{
         return this.executarQuery(sql, id)
     }
 
+    getByUsername(nome_usuario){
+        const sql = "SELECT * FROM usuario WHERE nome_usuario = ?"
+        return this.executarQuery(sql, nome_usuario)
+    }
+
     async logUsuario(email, senha){
         try{
             const sql = "SELECT * FROM usuario WHERE email = ?"

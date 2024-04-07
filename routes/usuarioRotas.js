@@ -13,6 +13,10 @@ router.get('/usuarios/:id', middleware, (req, res) => {
     usuariosController.getById(req, res)
 })
 
+router.get('/usuarios/nome/:nome_usuario', (req, res) => {
+    usuariosController.getByUsername(req, res)
+})
+
 router.post('/usuarios/cadastrar', uploadUser.single("foto"), (req, res) => {
     usuariosController.novoUsuario(req, res)
 })
