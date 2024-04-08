@@ -31,6 +31,16 @@ class Time_usuario{
         return this.executarQuery(sql, id_time)
     }
 
+    getByIdUser(id_usuario){
+        const sql = `SELECT tu.id_time_usuario as time_usuarioReg, t.id_time as idTime, t.nome AS NomeTime, t.fk_id_capitao AS fkIdCapitao, u.id_usuario as idUser, u.nome_usuario AS NomeUsuario,  u.foto AS fotoUser
+        FROM time_usuario tu
+        INNER JOIN time t ON tu.fk_id_time = t.id_time
+        INNER JOIN usuario u ON tu.fk_id_usuario = u.id_usuario
+        WHERE u.id_usuario = ?`
+        return this.executarQuery(sql, id_usuario)
+    }
+
+
     getConvites(id){
         const sql = `SELECT id_solicitacao, fk_id_usuario, aceitou, t.nome as nome_time, id_time, u.nome as nome_do_usuario, nome_usuario, hora_envio FROM solicitacao_time_usuario s INNER JOIN time t on s.fk_id_time = t.id_time INNER JOIN usuario u on t.fk_id_capitao = u.id_usuario WHERE s.fk_id_usuario = ? AND s.aceitou = 'n'`
         return this.executarQuery(sql, id)
