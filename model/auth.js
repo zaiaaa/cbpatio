@@ -64,8 +64,11 @@ class AuthModel{
                     const token = jwt.sign({
                         id: user.id_usuario,
                         nome: user.nome_usuario,
+                        nome_completo: user.nome,
                         email: user.email,
+                        celular: user.celular,
                         foto: user.foto
+
                     },
                     
                     process.env.SECRET_LOG_USER,
