@@ -29,6 +29,13 @@ class ControllerTimeUsuario{
         .catch(err => res.status(400).json(err.message))
     }
 
+    conviteJaEnviado(req, res){
+        const {id_user, id_time} = req.params
+        modelTimeUsuario.conviteJaEnviado(id_user, id_time)
+        .then(solicitacao => res.status(200).json(solicitacao))
+        .catch(err => res.status(400).json(err.message))
+    }
+
     novoUsuarioTime(req, res){
         const newUserTeam = req.body
         modelTimeUsuario.novoUsuarioNoTime(newUserTeam)

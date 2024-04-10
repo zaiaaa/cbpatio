@@ -46,6 +46,11 @@ class Time_usuario{
         return this.executarQuery(sql, id)
     }
 
+    conviteJaEnviado(id_user, id_time){
+        const sql = `SELECT * FROM solicitacao_time_usuario WHERE fk_id_usuario = ? AND fk_id_time = ? AND (aceitou = 'n' OR aceitou = 's')`
+        return this.executarQuery(sql, [id_user, id_time])
+    }
+
     novoUsuarioNoTime(newUserTeam){
         const sql = `INSERT INTO time_usuario SET ?`
         return this.executarQuery(sql, newUserTeam)
