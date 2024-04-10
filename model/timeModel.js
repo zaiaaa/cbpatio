@@ -52,7 +52,13 @@ class TimeModel{
         return this.executarQuery(sql, [time, id])
     }
 
-    deletarTime(id){
+    async deletarTime(id){
+        //excluindo primeiro o time das tabelas filha a tabela time, para que não haja erro de parent key.
+        const sql1 = "DELETE FROM time_usuario WHERE fk_id_time = ?"
+        await this.executarQuery(sql1, id)
+        const sql2 = "DELETE FROM solicitacao_time_usuario WHERE fk_id_time = ?"
+        await this.executarQuery(sql2, id)
+
         const sql = "DELETE FROM time WHERE id_time = ?"
         return this.executarQuery(sql, id)
     }
