@@ -35,13 +35,22 @@ class TimeModel{
 
     async novoTime(time){
         //quando gerar um novo time, adicionar todos os integrantes na tabela usuario time
+        console.log(time)
         const sql = "INSERT INTO time SET ?"
 
         const sqlVerifica = `SELECT * FROM time WHERE nome = ?`
         const existsName = await this.executarQuery(sqlVerifica, time.nome)
 
+        const sqlTimesJaCriado = "SELECT * FROM time WHERE fk_id_capitao = ?"
+        const times = await this.executarQuery(sqlTimesJaCriado, time.fk_id_capitao)
+
+        console.log(times.length)
         if(existsName.length > 0){
             return {message: "Este nome de time já está cadastrado."}
+        }
+
+        if(times.length >= 5){
+            return {message: "Você passou do limite de criação de 5 times!"}
         }
 
         return this.executarQuery(sql, time)
