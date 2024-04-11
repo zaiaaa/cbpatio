@@ -38,6 +38,10 @@ router.get('/campeonatos/time/times/capitaes/:id_camp/fase/:fase', (req, res) =>
     time_campeonatoController.getCapitaoPorFase(req, res)
 })
 
+router.get('/campeonatos/time/times/jogos/:id_user', (req, res) => {
+    time_campeonatoController.getTeamsUserActive(req, res)
+}) 
+
 router.put('/campeonatos/hora/jogo/:jogo/fase/:fase/chave/:chave/campeonato/:idCamp', (req, res) => {
     time_campeonatoController.setGameDateTime(req, res)
 })

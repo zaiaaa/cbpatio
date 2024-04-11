@@ -121,6 +121,14 @@ class Time_campeonato{
         return this.executarQuery(sql, newTeam)
     }
 
+    getTeamUserActive(id_user){
+        const sql = `SELECT * FROM time_usuario tu
+        INNER JOIN time_campeonato tc ON tu.fk_id_time = tc.fk_id_time
+        WHERE tu.fk_id_usuario = 6 AND tc.chave != ""`
+
+        return this.executarQuery(sql, id_user)
+    }
+
     setGameDateTime(data_hora, idCampeonato, jogo, fase, chave ){
         const sql = `UPDATE time_campeonato SET ? 
         WHERE fk_id_campeonato = ?

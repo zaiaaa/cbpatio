@@ -79,6 +79,14 @@ class ControllerTimeCampeonato{
         .catch((err) => (res.status(400).json(err)))
     } 
 
+    getTeamsUserActive(req, res){
+        const {id_user} = req.params
+
+        modelTimeCampeonato.getTeamUserActive(id_user)
+        .then((time_campeonato) => (res.status(200).json(time_campeonato)))
+        .catch((err) => (res.status(400).json(err)))
+    }
+
     alteraTime_campeonato(req, res){
         const time_campeonatoAlterado = req.body 
         const {id} = req.params
