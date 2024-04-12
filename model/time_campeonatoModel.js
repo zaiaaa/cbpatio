@@ -125,7 +125,7 @@ class Time_campeonato{
         const sql = `SELECT tc.chave, tc.data_hora,
         tc.fase, tc.fk_id_campeonato, tc.fk_id_time,
         tc.jogo, c.foto, c.nome as nome_camp, c.modalidade, c.limite,
-        c.premiacao, t.nome as nome_time, t2.nome as nome_time_vs 
+        c.premiacao, t.nome as nome_time, t2.nome as nome_time_vs, c.id_campeonato, c.foto
         FROM time_campeonato tc
         LEFT JOIN time_usuario tu ON tc.fk_id_time = tu.fk_id_time 
         LEFT JOIN time t ON t.id_time = tc.fk_id_time 
