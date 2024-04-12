@@ -122,9 +122,11 @@ class Time_campeonato{
     }
 
     getTeamUserActive(id_user){
-        const sql = `SELECT * FROM time_usuario tu
+        const sql = `SELECT tc.chave, tc.data_hora, tc.fase, tc.fk_id_campeonato, tc.fk_id_time, c.foto, c.nome, c.modalidade, c.limite, c.premiacao, t.nome as nome_time FROM time_usuario tu
         INNER JOIN time_campeonato tc ON tu.fk_id_time = tc.fk_id_time
-        WHERE tu.fk_id_usuario = 6 AND tc.chave != ""`
+        INNER JOIN time t ON t.id_time = tc.fk_id_time
+        INNER JOIN campeonato c ON c.id_campeonato = tc.fk_id_campeonato 
+        WHERE tu.fk_id_usuario = ? AND tc.chave != ""`
 
         return this.executarQuery(sql, id_user)
     }
