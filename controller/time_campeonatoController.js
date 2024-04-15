@@ -96,6 +96,15 @@ class ControllerTimeCampeonato{
         .catch((err) => (res.status(400).json(err)))
     }
 
+    alterarChave(req, res){
+        const {id_camp, fase} = req.params
+        const team = req.body
+
+        modelTimeCampeonato.alterarChave(team, id_camp, fase)
+        .then((time_campeonato) => (res.status(201).json(time_campeonato)))
+        .catch((err) => (res.status(400).json(err)))
+    }
+
     deletarTime_campeonato(req, res){
         const {id} = req.params
 

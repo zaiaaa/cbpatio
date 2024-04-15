@@ -136,7 +136,7 @@ class Time_campeonato{
         
         LEFT JOIN time_campeonato tc2 ON tc.chave = tc2.chave AND tc.fase = tc2.fase AND tc.jogo = tc2.jogo AND tc.id_time_campeonato != tc2.id_time_campeonato AND tc.fk_id_campeonato = tc2.fk_id_campeonato
         LEFT JOIN time t2 ON tc2.fk_id_time = t2.id_time
-        WHERE tu.fk_id_usuario = ? AND tc.chave != ""`
+        WHERE tu.fk_id_usuario = ? AND tc.chave != "" AND tc.aconteceu != 's'`
 
         return this.executarQuery(sql, id_user)
     }
@@ -156,6 +156,12 @@ class Time_campeonato{
         const sql = "UPDATE time_campeonato SET ? WHERE id_time_campeonato = ?"
 
         return this.executarQuery(sql, [newTeam, id])
+    }
+
+    alterarChave(team, id_camp, fase){
+        const sql = "UPDATE time_campeonato SET ? WHERE fk_id_campeonato = ? AND fase = ?"
+        
+        return this.executarQuery(sql, [team, id_camp, fase])
     }
 
     deletarTimeCampeonato(id){

@@ -50,6 +50,10 @@ router.put('/campeonatos/time/alterarTime/:id', (req, res) => {
     time_campeonatoController.alteraTime_campeonato(req, res)
 })
 
+router.put('/campeonatos/time/aconteceu/fase/:fase/:id_camp', (req, res) => {
+    time_campeonatoController.alterarChave(req, res)
+})
+
 router.delete('/campeonatos/time/deletar/:id', (req, res) => {
     time_campeonatoController.deletarTime_campeonato(req, res)
 })
