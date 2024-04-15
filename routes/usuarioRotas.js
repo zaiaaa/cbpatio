@@ -9,7 +9,7 @@ router.get('/usuarios', middleware, (req, res) => {
     usuariosController.get(req, res)
 })
 
-router.get('/usuarios/:id', middleware, (req, res) => {
+router.get('/usuarios/:id', (req, res) => {
     usuariosController.getById(req, res)
 })
 
