@@ -45,6 +45,22 @@ class ControllerTimeCampeonato{
         .catch(err => res.status(400).json(err.message))
     }
 
+    getCampeaoActiveByUser(req, res){
+        const {id_user} = req.params
+
+        modelTimeCampeonato.getCampeaoActiveByUser(id_user)
+        .then(time_campeonato => res.status(200).json(time_campeonato))
+        .catch(err => res.status(400).json(err.message))
+    }
+
+    getInactiveTeamsElim(req, res){
+        const {id_user} = req.params
+
+        modelTimeCampeonato.getTeamInactiveElim(id_user)
+        .then(time_campeonato => res.status(200).json(time_campeonato))
+        .catch(err => res.status(400).json(err.message))
+    }
+
     getEliminadosPorJogo(req, res){
         const {id} = req.params
         const {jogo, faseAnterior, faseAtual, chave, chaveTarget} = req.query

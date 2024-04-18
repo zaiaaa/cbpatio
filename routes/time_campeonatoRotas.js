@@ -42,6 +42,14 @@ router.get('/campeonatos/time/times/jogos/:id_user', (req, res) => {
     time_campeonatoController.getTeamsUserActive(req, res)
 }) 
 
+router.get('/campeonatos/time/times/jogos/campeao/user/:id_user', (req, res) => {
+    time_campeonatoController.getCampeaoActiveByUser(req, res)
+})
+
+router.get('/campeonatos/time/times/jogos/eliminados/user/:id_user', (req, res) => {
+    time_campeonatoController.getInactiveTeamsElim(req, res)
+})
+
 router.put('/campeonatos/hora/jogo/:jogo/fase/:fase/chave/:chave/campeonato/:idCamp', (req, res) => {
     time_campeonatoController.setGameDateTime(req, res)
 })

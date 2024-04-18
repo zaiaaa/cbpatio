@@ -136,8 +136,47 @@ class Time_campeonato{
         
         LEFT JOIN time_campeonato tc2 ON tc.chave = tc2.chave AND tc.fase = tc2.fase AND tc.jogo = tc2.jogo AND tc.id_time_campeonato != tc2.id_time_campeonato AND tc.fk_id_campeonato = tc2.fk_id_campeonato
         LEFT JOIN time t2 ON tc2.fk_id_time = t2.id_time
-        WHERE tu.fk_id_usuario = ? AND tc.chave != "" AND tc.aconteceu != 's'`
+        WHERE tu.fk_id_usuario = ? AND tc.chave != "" AND tc.aconteceu != 's' `
 
+        return this.executarQuery(sql, id_user)
+    }
+
+    getCampeaoActiveByUser(id_user){
+        const sql = `SELECT tc.chave, tc.data_hora,
+        tc.fase, tc.fk_id_campeonato, tc.fk_id_time,
+        tc.jogo, c.foto, c.nome as nome_camp, c.modalidade, c.limite,
+        c.premiacao, t.nome as nome_time, t2.nome as nome_time_vs, c.id_campeonato, c.foto
+        FROM time_campeonato tc
+        
+        LEFT JOIN time_usuario tu ON tc.fk_id_time = tu.fk_id_time 
+
+        LEFT JOIN time t ON t.id_time = tc.fk_id_time 
+
+        LEFT JOIN campeonato c ON c.id_campeonato = tc.fk_id_campeonato 
+        
+        LEFT JOIN time_campeonato tc2 ON tc.chave = tc2.chave AND tc.fase = tc2.fase AND tc.jogo = tc2.jogo AND tc.id_time_campeonato != tc2.id_time_campeonato AND tc.fk_id_campeonato = tc2.fk_id_campeonato
+        LEFT JOIN time t2 ON tc2.fk_id_time = t2.id_time
+        WHERE tu.fk_id_usuario = ? AND tc.fase = 'campeao'`
+
+        return this.executarQuery(sql, id_user)
+    }
+
+    getTeamInactiveElim(id_user){
+        const sql = `SELECT tc.fase as eliminado_em, 
+        tc.fk_id_campeonato, tc.fk_id_time, c.foto, c.nome as nome_camp 
+    FROM 
+        time_campeonato tc
+    LEFT JOIN 
+        time_usuario tu ON tc.fk_id_time = tu.fk_id_time 
+    LEFT JOIN 
+        time t ON t.id_time = tc.fk_id_time 
+    LEFT JOIN 
+        campeonato c ON c.id_campeonato = tc.fk_id_campeonato 
+    WHERE 
+        tu.fk_id_usuario = ? 
+        AND tc.chave = '' 
+        AND tc.fase != 'campeao';`
+        
         return this.executarQuery(sql, id_user)
     }
 
