@@ -54,6 +54,10 @@ router.put('/campeonatos/hora/jogo/:jogo/fase/:fase/chave/:chave/campeonato/:idC
     time_campeonatoController.setGameDateTime(req, res)
 })
 
+router.get('/campeonatos/time/times/jogos/esperando/user/:id_user', (req, res) => {
+    time_campeonatoController.getWaitingTeams(req, res)
+})
+
 router.put('/campeonatos/time/alterarTime/:id', (req, res) => {
     time_campeonatoController.alteraTime_campeonato(req, res)
 })

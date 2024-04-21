@@ -70,6 +70,14 @@ class ControllerTimeCampeonato{
         .catch(err => res.status(400).json(err.message))
     }
 
+    getWaitingTeams(req, res){
+        const {id_user} = req.params
+        
+        modelTimeCampeonato.getWaitingTeams(id_user)
+        .then(time_campeonato => res.status(200).json(time_campeonato))
+        .catch(err => res.status(400).json(err.message))
+    }
+
     setGameDateTime(req, res){
         const {idCamp, jogo, fase, chave} = req.params
         const data_hora = req.body
