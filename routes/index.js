@@ -6,6 +6,7 @@ const time_usuariosRota = require('./time_usuarioRotas')
 const time_campeonatosRota = require('./time_campeonatoRotas')
 const liveonRoute = require("./liveOnRoute")
 const valoresRoute = require("./valoresRotas")
+const pagamento = require('./socket_pagamentos')
 
 module.exports = (app, express) => {
     app.use(express.json())
@@ -18,4 +19,5 @@ module.exports = (app, express) => {
     app.use(time_campeonatosRota)
     app.use(liveonRoute)
     app.use(valoresRoute)
+    app.use(pagamento)
 }
