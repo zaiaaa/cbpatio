@@ -49,15 +49,23 @@ const getStatusPayment = (req, res, id) => {
     }).then(response => {
             try{
                 if(response.data.status === "approved"){
-                    controller.onPaymentApproved("PAGO")
+                    controller.onPaymentApproved(`PAGO ${id}`)
                 }else if(response.data.status === "cancelled"){
+                    console.log('CANCELADO')
+                    controller.left("SAIU")
                     return
                 }
                 else{
                     setTimeout(() => getStatusPayment(req, res, id), 2000);
-                    setTimeout(() => {
-                        cancelPayment(id);
-                    }, 600000);
+                    setTimeout(async () => {
+                        await axios.put(`https://api.mercadopago.com/v1/payments/${id}`, {
+                            status: 'cancelled'
+                        }, {
+                            headers: {
+                                'Authorization': `Bearer ${process.env.ACCESS_TOKEN_MP}`
+                            }
+                        })
+                    }, 5000);
                 }
             }catch(e){
                 console.log(e)
@@ -66,30 +74,14 @@ const getStatusPayment = (req, res, id) => {
     )
 }   
 
-const cancelPayment = (id) => {
-    axios.put(`https://api.mercadopago.com/v1/payments/${id}`, { status: "cancelled" }, {
+router.put('/cancelar/:id_payment', async (req, res) => {
+    const {id_payment} = req.params
+    await axios.put(`https://api.mercadopago.com/v1/payments/${id_payment}`, {status: "cancelled"},{
         headers: {
             'Authorization': `Bearer ${process.env.ACCESS_TOKEN_MP}`
         }
-    }).then(() => {
-        console.log("Pagamento cancelado com sucesso");
-        return
-    }).catch(error => {
-        console.error("Erro ao cancelar pagamento:", error);
-        return
-    });
-}
-
-router.put('/cancelar/:id_payment', (req, res) => {
-    const {id_payment} = req.params
-    const status = req.body
-    console.log("cancelou")
-    axios.put(`https://api.mercadopago.com/v1/payments/${id_payment}`, status, {
-        headers:{
-            'Authorization': `Bearer ${process.env.ACCESS_TOKEN_MP}`
-        }
     })
-
+    console.log("cancelou")
     controller.left("SAIU")
 })
 
