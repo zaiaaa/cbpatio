@@ -57,6 +57,7 @@ const getStatusPayment = (req, res, id) => {
                 }
                 else{
                     setTimeout(() => getStatusPayment(req, res, id), 2000);
+                    
                     setTimeout(async () => {
                         await axios.put(`https://api.mercadopago.com/v1/payments/${id}`, {
                             status: 'cancelled'
@@ -65,7 +66,7 @@ const getStatusPayment = (req, res, id) => {
                                 'Authorization': `Bearer ${process.env.ACCESS_TOKEN_MP}`
                             }
                         })
-                    }, 5000);
+                    }, 600000);
                 }
             }catch(e){
                 console.log(e)
