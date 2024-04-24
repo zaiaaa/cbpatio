@@ -17,7 +17,7 @@ router.post('/campeonato/pagar', (req, res) =>{
     
     payment.create({ body: {
         transaction_amount: 0.01,
-        description: 'Troca de salas',
+        description: 'Pagamento CBPATIO',
         payment_method_id: 'pix',
         payer: {
             "email": user.email,
