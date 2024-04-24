@@ -14,7 +14,8 @@ router.post('/campeonato/pagar', (req, res) =>{
     const user = req.body
     console.log(user)
     const name = user.name.split(" ")
-    
+    const valor = parseFloat(user.valor)
+    user.valor = valor
     payment.create({ body: {
         transaction_amount: 0.01,
         description: 'Pagamento CBPATIO',
@@ -30,7 +31,7 @@ router.post('/campeonato/pagar', (req, res) =>{
         },
         notification_url: "https://eoyyfylmpdd5zux.m.pipedream.net"
     } })
-    .then(resp => {
+    .then((resp) => {
         res.status(201).json(resp)
         console.log('Aguardando pagamento, QRCODE -> ', resp.point_of_interaction.transaction_data.qr_code)
         getStatusPayment(req, res, resp.id)
@@ -41,7 +42,6 @@ router.post('/campeonato/pagar', (req, res) =>{
 const getStatusPayment = (req, res, id) => {
     console.log(`https://api.mercadopago.com/v1/payments/${id}`)
 
-
     axios.get(`https://api.mercadopago.com/v1/payments/${id}`,{
         headers:{
             'Authorization': `Bearer ${process.env.ACCESS_TOKEN_MP}`
@@ -49,6 +49,15 @@ const getStatusPayment = (req, res, id) => {
     }).then(response => {
             try{
                 if(response.data.status === "approved"){
+                    // try{
+                    //     await axios.post(`http/localhost:3005/campeonatos/inscrever/pagamentos`, {
+                    //         "fk_id_time": user.fk_id_time,
+                    //         "fk_id_campeonato": user.fk_id_campeonato,
+                    //         "valor_pagamento": user.valor
+                    //     })
+                    // }catch(e){
+                    //     console.log(e)
+                    // }
                     controller.onPaymentApproved(`PAGO ${id}`)
                 }else if(response.data.status === "cancelled"){
                     console.log('CANCELADO')
