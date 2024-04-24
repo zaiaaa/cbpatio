@@ -19,6 +19,14 @@ class ValoresController{
         .then(valor => res.status(200).json(valor))
         .catch(err => res.status(400).json(err.message))
     }
+
+    setTimePagou(req, res){
+        const body = req.body
+
+        valoresModel.setTimePagou(body)
+        .then(valor => res.status(201).json(valor))
+        .catch(err => res.status(403).json(err.message))
+    }
 }
 
 module.exports = new ValoresController()

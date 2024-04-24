@@ -29,6 +29,12 @@ class ValoresModel{
 
         return this.executarQuery(sql)
     }
+
+    setTimePagou(data){
+        const sql = `INSERT INTO pagamentos SET ?`
+
+        return this.executarQuery(sql, data)
+    }
 }
 
 

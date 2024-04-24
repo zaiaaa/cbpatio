@@ -14,5 +14,9 @@ router.get("/campeonatos/premiacao/total", (req, res) => {
     valoresController.getPremiacao(req, res)
 })
 
+router.post("/campeonatos/inscrever/pagamentos", (req, res) => {
+    valoresController.setTimePagou(req, res)
+})
+
 
 module.exports = router
