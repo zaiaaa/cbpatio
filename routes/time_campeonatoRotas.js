@@ -58,6 +58,10 @@ router.get('/campeonatos/time/times/jogos/esperando/user/:id_user', (req, res) =
     time_campeonatoController.getWaitingTeams(req, res)
 })
 
+router.get('/campeonatos/time/usuario/existe/:id_user/:id_camp', (req, res) => {
+    time_campeonatoController.getUserInCampeonato(req, res)
+})
+
 router.put('/campeonatos/time/alterarTime/:id', (req, res) => {
     time_campeonatoController.alteraTime_campeonato(req, res)
 })

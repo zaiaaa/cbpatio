@@ -166,7 +166,7 @@ class Time_campeonato{
 
     getTeamInactiveElim(id_user){
         const sql = `SELECT tc.fase as eliminado_em, 
-        tc.fk_id_campeonato, tc.fk_id_time, c.foto, c.nome as nome_camp 
+        tc.fk_id_campeonato, tc.fk_id_time, c.foto, c.nome as nome_camp, t.nome 
     FROM 
         time_campeonato tc
     LEFT JOIN 
@@ -201,6 +201,17 @@ class Time_campeonato{
         WHERE tu.fk_id_usuario = ? AND tc.fase = '' AND tc.jogo = '' AND tc.aconteceu = ""`
 
         return this.executarQuery(sql, id_user)
+    }
+
+    getUserInCampeonato(id_camp, id_user){
+        const sql = `
+        SELECT t.nome, tu.fk_id_usuario FROM time_campeonato tc
+        LEFT JOIN time t ON tc.fk_id_time = id_time
+        LEFT JOIN time_usuario tu ON t.id_time = tu.fk_id_time 
+        
+        WHERE tc.fk_id_campeonato = ? AND tu.fk_id_usuario = ?`
+
+        return this.executarQuery(sql, [id_camp, id_user])
     }
 
     setGameDateTime(data_hora, idCampeonato, jogo, fase, chave ){
