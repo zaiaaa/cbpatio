@@ -50,9 +50,6 @@ router.get('/campeonatos/time/times/jogos/eliminados/user/:id_user', (req, res) 
     time_campeonatoController.getInactiveTeamsElim(req, res)
 })
 
-router.put('/campeonatos/hora/jogo/:jogo/fase/:fase/chave/:chave/campeonato/:idCamp', (req, res) => {
-    time_campeonatoController.setGameDateTime(req, res)
-})
 
 router.get('/campeonatos/time/times/jogos/esperando/user/:id_user', (req, res) => {
     time_campeonatoController.getWaitingTeams(req, res)
@@ -62,8 +59,16 @@ router.get('/campeonatos/time/usuario/existe/:id_user/:id_camp', (req, res) => {
     time_campeonatoController.getUserInCampeonato(req, res)
 })
 
+router.get('/campeonatos/time/horarioElim/:id_time/:id_camp/:fase', (req, res) => {
+    time_campeonatoController.getDateByIdAndFase(req, res)
+})
+
 router.put('/campeonatos/time/alterarTime/:id', (req, res) => {
     time_campeonatoController.alteraTime_campeonato(req, res)
+})
+
+router.put('/campeonatos/hora/jogo/:jogo/fase/:fase/chave/:chave/campeonato/:idCamp', (req, res) => {
+    time_campeonatoController.setGameDateTime(req, res)
 })
 
 router.put('/campeonatos/time/aconteceu/fase/:fase/:id_camp', (req, res) => {

@@ -214,6 +214,13 @@ class Time_campeonato{
         return this.executarQuery(sql, [id_camp, id_user])
     }
 
+    getDateByIdAndFase(id_time, id_camp, fase){
+        const sql = `SELECT data_hora FROM time_campeonato tc
+            WHERE fk_id_time = ? AND fk_id_campeonato = ? AND fase = ?;
+        `
+        return this.executarQuery(sql, [id_time, id_camp, fase])
+    }
+
     setGameDateTime(data_hora, idCampeonato, jogo, fase, chave ){
         const sql = `UPDATE time_campeonato SET ? 
         WHERE fk_id_campeonato = ?
