@@ -59,6 +59,7 @@ const getStatusPayment = (req, res, id) => {
                     //     console.log(e)
                     // }
                     controller.onPaymentApproved(`PAGO ${id}`)
+                    return
                 }else if(response.data.status === "cancelled"){
                     console.log('CANCELADO')
                     controller.left("SAIU")
@@ -67,18 +68,33 @@ const getStatusPayment = (req, res, id) => {
                 else{
                     setTimeout(() => getStatusPayment(req, res, id), 2000);
                     
+                    //ele ta excluindo ate o pagamento que foi aprovado.
                     setTimeout(async () => {
-                        await axios.put(`https://api.mercadopago.com/v1/payments/${id}`, {
-                            status: 'cancelled'
-                        }, {
+                        const pago = axios.get(`https://api.mercadopago.com/v1/payments/${id}`, {
                             headers: {
                                 'Authorization': `Bearer ${process.env.ACCESS_TOKEN_MP}`
                             }
-                        })
-                    }, 600000);
+                        }).then(
+                            async (data) => {
+                                if(data.data.status == 'pending'){
+                                    await axios.put(`https://api.mercadopago.com/v1/payments/${id}`, {
+                                        status: 'cancelled'
+                                    }, {
+                                        headers: {
+                                            'Authorization': `Bearer ${process.env.ACCESS_TOKEN_MP}`
+                                        }
+                                    })
+                                }
+                            }
+                        )
+                        return
+                    }, 20000);
+
+                    return
                 }
             }catch(e){
-                console.log(e)
+                console.log('erro tal ->', e)
+                return
             }
         }
     )
