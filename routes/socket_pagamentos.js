@@ -70,7 +70,7 @@ const getStatusPayment = (req, res, id) => {
                     
                     //ele ta excluindo ate o pagamento que foi aprovado.
                     setTimeout(async () => {
-                        const pago = axios.get(`https://api.mercadopago.com/v1/payments/${id}`, {
+                        axios.get(`https://api.mercadopago.com/v1/payments/${id}`, {
                             headers: {
                                 'Authorization': `Bearer ${process.env.ACCESS_TOKEN_MP}`
                             }
@@ -88,7 +88,7 @@ const getStatusPayment = (req, res, id) => {
                             }
                         )
                         return
-                    }, 20000);
+                    }, 600000);
 
                     return
                 }
