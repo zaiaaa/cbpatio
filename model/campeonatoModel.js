@@ -15,32 +15,32 @@ class CamepeonatoModel{
     }
 
     get(){
-        const sql = "SELECT * FROM Campeonato"
+        const sql = "SELECT * FROM campeonato"
         return this.executarQuery(sql)
     }
 
     getByName(nome){
-        const sql = "SELECT * FROM Campeonato WHERE nome LIKE ?"
+        const sql = "SELECT * FROM campeonato WHERE nome LIKE ?"
         return this.executarQuery(sql, `%${nome}%`)
     }
 
     getById(id){
-        const sql = "SELECT * FROM Campeonato WHERE id_campeonato = ?"
+        const sql = "SELECT * FROM campeonato WHERE id_campeonato = ?"
         return this.executarQuery(sql, id)
     }
 
     cadastrarCampeonato(body){
-        const sql = "INSERT INTO Campeonato SET ?"
+        const sql = "INSERT INTO campeonato SET ?"
         return this.executarQuery(sql, body)
     }
 
     atualizarCampeonato(body, id){
-        const sql = "UPDATE Campeonato SET ? WHERE id_campeonato = ?"
+        const sql = "UPDATE campeonato SET ? WHERE id_campeonato = ?"
         return this.executarQuery(sql, [body, id])
     }
 
     deletarCampeonato(id){
-        const sql = "DELETE FROM Campeonato WHERE id_campeonato = ?"
+        const sql = "DELETE FROM campeonato WHERE id_campeonato = ?"
         return this.executarQuery(sql, id)
     }
 }   

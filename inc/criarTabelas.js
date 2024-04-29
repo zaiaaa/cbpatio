@@ -7,12 +7,12 @@ class CriarTabelas {
     }
 
     criarTabelas() {
-        this.criarTabelaUsuario()
-        this.criarTabelaTime()
-        this.criarTabelaCampeonato()
-        this.criarTabelaTimeUsuario()
-        this.criarTabelaTimeCampeonato()
-        this.criarTabelaSolicitacaoTime()
+        // this.criarTabelaUsuario()
+        // this.criarTabelaTime()
+        // this.criarTabelaCampeonato()
+        // this.criarTabelaTimeUsuario()
+        // this.criarTabelaTimeCampeonato()
+        // this.criarTabelaSolicitacaoTime()
     }
 
     criarTabelaUsuario(){

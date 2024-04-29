@@ -67,7 +67,8 @@ class TimeModel{
         await this.executarQuery(sql1, id)
         const sql2 = "DELETE FROM solicitacao_time_usuario WHERE fk_id_time = ?"
         await this.executarQuery(sql2, id)
-
+        const sql3 = "DELETE FROM time_campeonato WHERE fk_id_time = ?"
+        await this.executarQuery(sql3, id)
         const sql = "DELETE FROM time WHERE id_time = ?"
         return this.executarQuery(sql, id)
     }

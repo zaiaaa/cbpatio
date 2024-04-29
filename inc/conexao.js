@@ -1,16 +1,16 @@
-const mysql = require('mysql')
+const mysql = require('mysql2')
 let conn = ''
 
 try{
     conn = mysql.createConnection({
-        host:"localhost",
-        port:"3306",
+        host:"viaduct.proxy.rlwy.net",
+        port:"56251",
         user: "root",
-        password:"",
-        database: "cb_patio"
+        password:"jEJnWWPzIatNXfPCrwyIIamBbAyiClCp",
+        database: "railway"
     })
 }catch(e){
-    conn = 'erro -> ', e.message
+    conn = 'erro -> ', e.message, 'wdadwd'
 }
 
 
