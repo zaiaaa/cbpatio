@@ -17,7 +17,7 @@ router.post('/campeonato/pagar', (req, res) =>{
     const valor = parseFloat(user.valor)
     user.valor = valor
     payment.create({ body: {
-        transaction_amount: 0.01,
+        transaction_amount: valor,
         description: 'Pagamento CBPATIO',
         payment_method_id: 'pix',
         payer: {
