@@ -1,12 +1,14 @@
+require('dotenv').config()
 const mysql = require('mysql2')
+
 let conn = ''
 
 try{
     conn = mysql.createConnection({
-        host:"viaduct.proxy.rlwy.net",
-        port:"56251",
+        host:"roundhouse.proxy.rlwy.net",
+        port:"11731",
         user: "root",
-        password:"jEJnWWPzIatNXfPCrwyIIamBbAyiClCp",
+        password:process.env.DATABASE_PASSWORD,
         database: "railway"
     })
 }catch(e){
