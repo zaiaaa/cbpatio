@@ -47,18 +47,24 @@ class UsuariosController{
     async atualizarUsuario(req, res){
         const { id } = req.params
         const userJson = await usuariosModel.getById(id)
-        const userFoto = userJson[0].foto
-        const path = userFoto.replace(/\\/g, "/")
-        if(fs.existsSync(path)){
-            fs.unlink(path, (err) => {
-                if(err) console.log(err)
-            })
-        }
-
         const usuario = req.body
         const foto = req.file
-
+        
         !foto?.path ? "" : usuario.foto = foto?.path
+        
+        if(foto?.path){
+            const userFoto = userJson[0].foto
+            const path = userFoto.replace(/\\/g, "/")
+            
+            if(fs.existsSync(path)){
+                fs.unlink(path, (err) => {
+                    if(err) console.log(err)
+                })
+            }
+        }
+
+
+
 
         usuariosModel.atualizarUsuario(usuario, id)
         .then(usuarioAtualizado => res.status(200).json(usuarioAtualizado))
