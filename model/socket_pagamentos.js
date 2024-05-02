@@ -10,7 +10,7 @@ const { Server } = require('socket.io')
           {
             transports: ['websocket'],
             cors: {
-              origin: 'http://localhost:5173',
+              origin: 'https://cbpatio.vercel.app',
               methods: ['GET', 'POST'],
           },});
     
