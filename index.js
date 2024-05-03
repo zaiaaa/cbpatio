@@ -30,11 +30,11 @@ app.get('/', (req, res) => {
 })
 
 
-server.listen(3005 || process.env.PORT, (e) => {
+server.listen(process.env.PORT || 3005, (e) => {
     if(e){
         console.error('erro -> ', e)
     }
-    console.log(`Aplicação rodando em http://localhost:${3005 || process.env.PORT } (vtnc)`)
+    console.log(`Aplicação rodando em http://localhost:${process.env.PORT || 3005} (vtnc)`)
 })
 
 SocketServer.init(server)
