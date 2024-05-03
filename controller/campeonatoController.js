@@ -49,7 +49,7 @@ class CampeonatoController {
         
         !foto?.path ? body.foto = "" : body.foto = foto.path
 
-        if(foto?.path && body.foto){
+        if(foto?.path && body.foto != ""){
             const campFoto = campJson[0].foto
             const path = campFoto.replace(/\\/g, "/")
             if(fs.existsSync(path)){
