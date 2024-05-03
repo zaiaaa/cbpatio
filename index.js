@@ -34,7 +34,7 @@ server.listen(3005 || process.env.PORT, (e) => {
     if(e){
         console.error('erro -> ', e)
     }
-    console.log(`Aplicação rodando em http://localhost:${3005 || process.env.PORT }`)
+    console.log(`Aplicação rodando em http://localhost:${3005 || process.env.PORT } (vtnc)`)
 })
 
 SocketServer.init(server)
