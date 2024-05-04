@@ -166,7 +166,8 @@ class Time_campeonato{
 
     getTeamInactiveElim(id_user){
         const sql = `SELECT tc.fase as eliminado_em, 
-        tc.fk_id_campeonato, tc.fk_id_time, c.foto, c.nome as nome_camp, t.nome 
+        tc.fk_id_campeonato, tc.fk_id_time, c.foto, c.nome as nome_camp, t.nome,
+        tc.data_hora as data_hora
     FROM 
         time_campeonato tc
     LEFT JOIN 
