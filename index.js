@@ -6,7 +6,7 @@ const app = express()
 const server = http.createServer(app)
 const SocketServer = require('./model/socket_pagamentos')
 app.use(cors({
-    origin: ["https://cbpatio.vercel.app", "https://cbpatio-admin.vercel.app", "http://localhost:5173", "http://localhost:5173"],
+    origin: ["https://cbpatio.vercel.app", "https://cbpatio-admin.vercel.app", "http://localhost:5173", "http://localhost:5174"],
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
     credentials: true,
     optionsSuccessStatus: 204,
