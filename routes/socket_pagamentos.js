@@ -1,15 +1,17 @@
-const { default: axios } = require('axios')
+const axios = require('axios')
 const { Router, response } = require('express')
 const router = Router()
 const {MercadoPagoConfig, Payment} = require('mercadopago')
 const controller = require("../controller/socket_pagamentos")
 const { socket } = require('../model/socket_pagamentos')
 
-router.post('/campeonato/pagar', (req, res) =>{
+router.post('/campeonato/pagar/:fk_id_time/:fk_id_campeonato', (req, res) =>{
     
     
     const client = new MercadoPagoConfig({ accessToken: process.env.ACCESS_TOKEN_MP });
     const payment = new Payment(client);
+
+    const {fk_id_time, fk_id_campeonato} = req.params 
 
     const user = req.body
     console.log(user)
@@ -34,31 +36,32 @@ router.post('/campeonato/pagar', (req, res) =>{
     .then((resp) => {
         res.status(201).json(resp)
         console.log('Aguardando pagamento, QRCODE -> ', resp.point_of_interaction.transaction_data.qr_code)
-        getStatusPayment(req, res, resp.id)
+        getStatusPayment(req, res, resp.id, fk_id_campeonato, fk_id_time, valor)
     }
     ).catch(console.log);
 })
 
-const getStatusPayment = (req, res, id) => {
-    console.log(`https://api.mercadopago.com/v1/payments/${id}`)
+const getStatusPayment = (req, res, id_pagamento, fk_id_campeonato = "", fk_id_time = "", valor = "") => {
+    console.log(`https://api.mercadopago.com/v1/payments/${id_pagamento}`)
 
-    axios.get(`https://api.mercadopago.com/v1/payments/${id}`,{
+    axios.get(`https://api.mercadopago.com/v1/payments/${id_pagamento}`,{
         headers:{
             'Authorization': `Bearer ${process.env.ACCESS_TOKEN_MP}`
         }
-    }).then(response => {
+    }).then(async response => {
             try{
+                console.log(fk_id_campeonato, fk_id_time)
                 if(response.data.status === "approved"){
-                    // try{
-                    //     await axios.post(`http/localhost:3005/campeonatos/inscrever/pagamentos`, {
-                    //         "fk_id_time": user.fk_id_time,
-                    //         "fk_id_campeonato": user.fk_id_campeonato,
-                    //         "valor_pagamento": user.valor
-                    //     })
-                    // }catch(e){
-                    //     console.log(e)
-                    // }
-                    controller.onPaymentApproved(`PAGO ${id}`)
+                    try{
+                        await axios.post(`https://cbpatio-production.up.railway.app/campeonatos/inscrever/pagamentos`, {
+                            "fk_id_time": fk_id_time,
+                            "fk_id_campeonato": fk_id_campeonato,
+                            "valor_pagamento": valor
+                        })
+                    }catch(e){
+                        console.log(e)
+                    }
+                    controller.onPaymentApproved(`PAGO ${id_pagamento}`)
                     return
                 }else if(response.data.status === "cancelled"){
                     console.log('CANCELADO')
@@ -66,18 +69,18 @@ const getStatusPayment = (req, res, id) => {
                     return
                 }
                 else{
-                    setTimeout(() => getStatusPayment(req, res, id), 2000);
+                    setTimeout(() => getStatusPayment(req, res, id_pagamento, fk_id_campeonato, fk_id_time, valor), 2000);
                     
                     //ele ta excluindo ate o pagamento que foi aprovado.
                     setTimeout(async () => {
-                        axios.get(`https://api.mercadopago.com/v1/payments/${id}`, {
+                        axios.get(`https://api.mercadopago.com/v1/payments/${id_pagamento}`, {
                             headers: {
                                 'Authorization': `Bearer ${process.env.ACCESS_TOKEN_MP}`
                             }
                         }).then(
                             async (data) => {
                                 if(data.data.status == 'pending'){
-                                    await axios.put(`https://api.mercadopago.com/v1/payments/${id}`, {
+                                    await axios.put(`https://api.mercadopago.com/v1/payments/${id_pagamento}`, {
                                         status: 'cancelled'
                                     }, {
                                         headers: {

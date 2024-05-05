@@ -8,10 +8,10 @@ const { Server } = require('socket.io')
       init(server) {
         const io = new Server(server,
           {
-            transports: ['websocket'],
+            transports: ['websocket', 'polling'],
             cors: {
               origin: 'https://cbpatio.vercel.app',
-              methods: ['GET', 'POST'],
+              methods: ['GET', 'POST', 'PUT', 'DELETE'],
           },});
     
         io.on('connection', (socket) => {
