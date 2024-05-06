@@ -52,7 +52,7 @@ class UsuariosController{
         
         !foto?.path ? "" : usuario.foto = foto?.path
         
-        if(foto?.path){
+        if(foto?.path && body.foto != "" && userJson[0]?.foto){
             const userFoto = userJson[0].foto
             const path = userFoto.replace(/\\/g, "/")
             
