@@ -39,8 +39,16 @@ class CamepeonatoModel{
         return this.executarQuery(sql, [body, id])
     }
 
-    deletarCampeonato(id){
+    async deletarCampeonato(id){
+        const sql1 = "DELETE FROM pagamentos WHERE fk_id_campeonato = ?"
+        const sql2 = "DELETE FROM time_campeonato WHERE fk_id_campeonato = ?"
+        await this.executarQuery(sql1, id)
+        await this.executarQuery(sql2, id)    
+    
         const sql = "DELETE FROM campeonato WHERE id_campeonato = ?"
+        
+        
+        
         return this.executarQuery(sql, id)
     }
 }   
