@@ -49,8 +49,8 @@ class TimeModel{
             return {message: "Este nome de time já está cadastrado."}
         }
 
-        if(times.length >= 5){
-            return {message: "Você passou do limite de criação de 5 times!"}
+        if(times.length >= 10){
+            return {message: "Você passou do limite de criação de 10 times!"}
         }
 
         return this.executarQuery(sql, time)
