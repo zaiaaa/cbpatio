@@ -96,7 +96,7 @@ class Time_campeonato{
     }
 
     getCapitao(id_camp){
-        const sql = `SELECT DISTINCT t.id_time, u.nome as nome_usuario, u.celular, t.nome as nome_time FROM time_campeonato tc 
+        const sql = `SELECT DISTINCT t.id_time, u.nome as nome_usuario, u.celular, t.nome as nome_time, u.foto as foto FROM time_campeonato tc 
         INNER JOIN time t ON t.id_time = tc.fk_id_time
         INNER JOIN usuario u ON u.id_usuario = t.fk_id_capitao
         WHERE tc.fk_id_campeonato = ?
