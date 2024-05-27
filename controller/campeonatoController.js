@@ -47,7 +47,7 @@ class CampeonatoController {
         const body = req.body
         const foto = req.file
         
-        !foto?.path ? body.foto = "" : body.foto = foto.path
+        !foto?.path ? body.foto = campJson[0].foto : body.foto = foto.path
 
         if(foto?.path && body.foto != "" && campJson?.foto){
             const campFoto = campJson[0].foto

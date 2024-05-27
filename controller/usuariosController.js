@@ -50,9 +50,9 @@ class UsuariosController{
         const usuario = req.body
         const foto = req.file
         
-        !foto?.path ? "" : usuario.foto = foto?.path
+        !foto?.path ? usuario.foto = userJson[0].foto : usuario.foto = foto?.path
         
-        if(foto?.path){
+        if(foto?.path && usuario.foto != "" && userJson?.foto){
             const userFoto = userJson[0].foto
             const path = userFoto.replace(/\\/g, "/")
             
