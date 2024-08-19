@@ -15,7 +15,7 @@ class CamepeonatoModel{
     }
 
     get(){
-        const sql = "SELECT * FROM campeonato"
+        const sql = "SELECT * FROM campeonato WHERE ativo='s'"
         return this.executarQuery(sql)
     }
 
