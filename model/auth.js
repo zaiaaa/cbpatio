@@ -67,8 +67,13 @@ class AuthModel{
                         nome_completo: user.nome,
                         email: user.email,
                         celular: user.celular,
-                        foto: user.foto
-
+                        foto: user.foto,
+                        nick_psn: user.nick_psn,
+                        nick_xbox: user.nick_xbox,
+                        nick_supercell: user.nick_supercell,
+                        nick_epic: user.nick_epic,
+                        jogo_favorito: user.jogo_favorito,
+                        biografia: user.biografia
                     },
                     
                     process.env.SECRET_LOG_USER,
