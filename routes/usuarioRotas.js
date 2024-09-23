@@ -17,7 +17,7 @@ router.get('/usuarios/nome/:nome_usuario', (req, res) => {
     usuariosController.getByUsername(req, res)
 })
 
-router.get('/usuarios/search', (req, res) => {
+router.get('/pesquisar/usuarios', (req, res) => {
     usuariosController.topUsersSearch(req, res)
 })
 
