@@ -17,6 +17,10 @@ router.get('/usuarios/nome/:nome_usuario', (req, res) => {
     usuariosController.getByUsername(req, res)
 })
 
+router.get('/usuarios/search', (req, res) => {
+    usuariosController.topUsersSearch(req, res)
+})
+
 router.post('/usuarios/cadastrar', uploadUser.single("foto"), (req, res) => {
     usuariosController.novoUsuario(req, res)
 })
