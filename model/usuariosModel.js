@@ -44,6 +44,19 @@ class UsuariosModel{
         return this.executarQuery(sql, offset)
     }
 
+    searchUsers(pagina = 1, nome){
+        const offset = (pagina - 1) * 10
+        const sql = `SELECT
+         id_usuario, nome, nome_usuario, foto, nick_psn, nick_supercell, nick_epic, nick_xbox, biografia
+        FROM usuario
+        WHERE nome_usuario LIKE ?
+        LIMIT 10 OFFSET ?;`
+        
+        console.log(nome)
+
+        return this.executarQuery(sql, [`%${nome}%`, offset])
+    }
+
     async logUsuario(email, senha){
         try{
             const sql = "SELECT * FROM usuario WHERE email = ?"

@@ -21,6 +21,10 @@ router.get('/pesquisar/usuarios', (req, res) => {
     usuariosController.topUsersSearch(req, res)
 })
 
+router.get('/pesquisar/usuario', (req, res) => {
+    usuariosController.searchUsers(req, res)
+})
+
 router.post('/usuarios/cadastrar', uploadUser.single("foto"), (req, res) => {
     usuariosController.novoUsuario(req, res)
 })

@@ -34,6 +34,18 @@ class UsuariosController{
         .catch(err => res.status(400).json(err.message))
     }
 
+    searchUsers(req, res){
+        const { nome } = req.query;
+        const { pagina } = req.query;
+        console.log(pagina)
+
+        const paginaAtual = parseInt(pagina) || 1; // Define a página atual (default: 1)
+
+        usuariosModel.searchUsers(paginaAtual, nome)
+        .then(users => res.status(200).json(users))
+        .catch(err => res.status(400).json(err.message))
+    }
+
     logUsuario(req, res){
         const {email} = req.body
         const {senha} = req.body
