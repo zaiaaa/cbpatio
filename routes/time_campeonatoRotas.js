@@ -6,6 +6,14 @@ router.post('/campeonatos/time/novoTime', (req, res) => {
     time_campeonatoController.novoTimeCampeonato(req, res)
 })
 
+router.get('/campeonatos/time/usuario/campeao/:id_user', (req, res) => {
+    time_campeonatoController.getUserCampeao(req, res)
+})
+
+router.get('/campeonatos/time/usuario/participacao/:id_time/:id_user', (req, res) => {
+    time_campeonatoController.getUserParticipacao(req, res)
+})
+
 router.get('/campeonatos/time/times', (req, res) => {
     time_campeonatoController.getTimes_campeonato(req, res)
 })

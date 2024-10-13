@@ -115,6 +115,29 @@ class Time_campeonato{
           return this.executarQuery(sql, [id_camp, fase])
     }
 
+    getUserCampeao(id_user){
+        const sql = `select * from time_campeonato tc
+        INNER JOIN time_usuario tu 
+        WHERE tc.fk_id_time = tu.fk_id_time 
+        AND tc.fase = "campeao"
+        AND tu.fk_id_usuario = ?
+        `
+
+        return this.executarQuery(sql, id_user)
+    }
+
+    getUserParticipacao(id_time, id_user){
+        const sql = `select DISTINCT tc.fk_id_time, tu.fk_id_usuario
+         from time_campeonato
+          tc INNER JOIN time_usuario
+           tu WHERE tu.fk_id_time = tc.fk_id_time 
+           AND tc.fk_id_time = ? 
+           AND tu.fk_id_usuario = ? 
+           AND aconteceu = 's'`
+
+         return this.executarQuery(sql, [id_time, id_user])
+    }
+
     novoTime_campeonato(newTeam){
         const sql = "INSERT INTO time_campeonato SET ?"
 

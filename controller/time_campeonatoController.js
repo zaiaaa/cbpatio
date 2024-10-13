@@ -9,6 +9,22 @@ class ControllerTimeCampeonato{
         .catch(err => res.status(400).json(err.message))
     }
 
+    getUserCampeao(req, res){
+        const {id_user} = req.params
+        
+        modelTimeCampeonato.getUserCampeao(id_user)
+        .then(time_campeonato => res.status(200).json(time_campeonato))
+        .catch(err => res.status(400).json(err.message))
+    }
+
+    getUserParticipacao(req, res){
+        const {id_time, id_user} = req.params
+        
+        modelTimeCampeonato.getUserParticipacao(id_time, id_user)
+        .then(time_campeonato => res.status(200).json(time_campeonato))
+        .catch(err => res.status(400).json(err.message))
+    }
+
     getTimes_campeonato(req, res){
         modelTimeCampeonato.getTimes()
         .then(time_campeonato => res.status(200).json(time_campeonato))
